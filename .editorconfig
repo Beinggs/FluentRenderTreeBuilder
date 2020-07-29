@@ -1,0 +1,7 @@
+﻿[*.cs]
+
+# IDE0058: Expression value is never used
+csharp_style_unused_value_expression_statement_preference = discard_variable:silent
+
+# IDE0040: Add accessibility modifiers
+dotnet_style_require_accessibility_modifiers = never:silent

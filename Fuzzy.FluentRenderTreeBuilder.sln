@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30323.103
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{648F4CCE-F064-4136-982B-99A91294F451}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fuzzy.FluentRenderTreeBuilder", "Fuzzy.FluentRenderTreeBuilder\Fuzzy.FluentRenderTreeBuilder.csproj", "{3DDC55FE-CB7E-45E8-88BF-B334CF7A6325}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fuzzy.Components.TestApp", "Fuzzy.Components.TestApp\Fuzzy.Components.TestApp.csproj", "{4EA9507A-8942-4DE8-8358-8C4808A2C01A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3DDC55FE-CB7E-45E8-88BF-B334CF7A6325}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DDC55FE-CB7E-45E8-88BF-B334CF7A6325}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DDC55FE-CB7E-45E8-88BF-B334CF7A6325}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DDC55FE-CB7E-45E8-88BF-B334CF7A6325}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4EA9507A-8942-4DE8-8358-8C4808A2C01A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EA9507A-8942-4DE8-8358-8C4808A2C01A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EA9507A-8942-4DE8-8358-8C4808A2C01A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EA9507A-8942-4DE8-8358-8C4808A2C01A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {009B84E6-9337-4E97-86AD-F43200367D32}
+	EndGlobalSection
+EndGlobal

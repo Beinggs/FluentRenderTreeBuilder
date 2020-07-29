@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <RazorLangVersion>3.0</RazorLangVersion>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Shared\MainLayoutOld.razor.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Shared\MainLayoutOld.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.1.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="3.1.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.1.6" />
+    <PackageReference Include="Microsoft.Extensions.Localization" Version="3.1.6" />
+    <PackageReference Include="Syncfusion.Blazor" Version="18.2.0.46" />
+  </ItemGroup>
+
+</Project>
+ 
