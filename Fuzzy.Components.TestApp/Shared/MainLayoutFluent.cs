@@ -26,7 +26,7 @@ namespace Fuzzy.Components.TestApp.Shared
 					.Close()
 					.NewLine()
 					.Div("content px-4")
-						.NewLine().Content(Body)
+						.Content(Body)
 					.Close()
 				.Close();
 	}

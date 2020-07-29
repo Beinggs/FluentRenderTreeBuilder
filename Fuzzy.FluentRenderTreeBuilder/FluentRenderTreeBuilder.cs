@@ -161,30 +161,45 @@ namespace Fuzzy.Components
 			return this;
 		}
 
-		public FluentRenderTreeBuilder Component(Type type, [CallerLineNumber] int line = 0)
+		public FluentRenderTreeBuilder Component(Type type, bool prettyPrint = true,
+				[CallerLineNumber] int line = 0)
 		{
-			PrettyPrint(line);
+			if (prettyPrint)
+				PrettyPrint(line);
+
 			_builder.OpenComponent(GetSequence(line), type);
-			PrettyPrint(line, offset: -1);
+
+			if (prettyPrint)
+				PrettyPrint(line, offset: -1);
+
 			_builder.CloseComponent();
 
 			return this;
 		}
 
-		public FluentRenderTreeBuilder Component<TComponent>([CallerLineNumber] int line = 0)
+		public FluentRenderTreeBuilder Component<TComponent>(bool prettyPrint = true,
+				[CallerLineNumber] int line = 0)
 			where TComponent : IComponent
 		{
-			PrettyPrint(line);
+			if (prettyPrint)
+				PrettyPrint(line);
+
 			_builder.OpenComponent<TComponent>(GetSequence(line));
-			PrettyPrint(line, offset: -1);
+
+			if (prettyPrint)
+				PrettyPrint(line, offset: -1);
+
 			_builder.CloseComponent();
 
 			return this;
 		}
 
-		public FluentRenderTreeBuilder ContentComponent(Type type, [CallerLineNumber] int line = 0)
+		public FluentRenderTreeBuilder ContentComponent(Type type, bool prettyPrint = true,
+				[CallerLineNumber] int line = 0)
 		{
-			PrettyPrint(line);
+			if (prettyPrint)
+				PrettyPrint(line);
+
 			_builder.OpenComponent(GetSequence(line), type);
 			_blocks.Push(BlockType.Component);
 
@@ -261,10 +276,12 @@ namespace Fuzzy.Components
 			return this;
 		}
 
-		public FluentRenderTreeBuilder Element(string name,
+		public FluentRenderTreeBuilder Element(string name, bool prettyPrint = true,
 				[CallerLineNumber] int line = 0)
 		{
-			PrettyPrint(line);
+			if (prettyPrint)
+				PrettyPrint(line);
+
 			_builder.OpenElement(GetSequence(line), name);
 			_blocks.Push(BlockType.Element);
 
@@ -296,8 +313,12 @@ namespace Fuzzy.Components
 			return this;
 		}
 
-		public FluentRenderTreeBuilder Region([CallerLineNumber] int line = 0)
+		public FluentRenderTreeBuilder Region(bool prettyPrint = true,
+				[CallerLineNumber] int line = 0)
 		{
+			if (prettyPrint)
+				PrettyPrint(line);
+
 			_builder.OpenRegion(GetSequence(line));
 			_blocks.Push(BlockType.Region);
 
@@ -376,11 +397,11 @@ namespace Fuzzy.Components
 		/// <see cref="Element(string, int)"/> and <see cref="Component(Type, int)"/>.
 		/// </remarks>
 		/// <returns></returns>
-		public FluentRenderTreeBuilder Close(
+		public FluentRenderTreeBuilder Close(bool prettyPrint = true,
 				[CallerLineNumber] int line = 0)
 		{
 			var type = _blocks.Pop();
-			if (type != BlockType.Region)
+			if (prettyPrint)
 				PrettyPrint(line);
 
 			switch (type)
