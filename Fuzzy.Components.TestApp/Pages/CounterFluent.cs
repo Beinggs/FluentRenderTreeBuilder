@@ -16,13 +16,13 @@ namespace Fuzzy.Components.TestApp.Shared
 
 		protected override void BuildRenderTree(RenderTreeBuilder builder)
 			=> builder.Build(logger: FrtbLogger)
-				.H1("Fluent Counter").NewLine()
-				.P("Current count: ").Content(currentCount)
-				.CloseInline().NewLine()
-				.Element("button", "btn btn-primary")
+				.H1("Fluent Counter")
+				.NewLine()
+				.OpenP().Content("Current count: ").Content(currentCount).CloseInline()
+				.NewLine()
+				.OpenElement("button", "btn btn-primary")
 					.Attribute("onclick", EventCallback.Factory.Create<MouseEventArgs>(this, IncrementCount))
-					.Content("Click me")
-				.CloseInline();
+					.Content("Click me").CloseInline();
 
 		int currentCount = 0;
 
