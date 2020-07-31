@@ -15,7 +15,7 @@ namespace Fuzzy.Components
 	/// Automatically generates <see cref="RenderTreeBuilder"/> calls in a fluent style whilst
 	/// taking care of newlines and indentation if the <c>prettyPrint</c> constructor argument
 	/// is <c>true</c>, as well as automatically generated source line based sequence numbers
-	/// for all nodes in the render tree.
+	/// for all frames in the render tree.
 	/// </summary>
 	/// <remarks>
 	/// <see cref="IDisposable"/> is implemented in order to provide automatic verification of
@@ -23,9 +23,9 @@ namespace Fuzzy.Components
 	/// calls with <see cref="Close"/> calls, if required.
 	/// <para>
 	/// Sequence numbers generated are 10 times the source code line number from where each
-	/// method is called, which allows for multiple nodes on the same line as well as additional
-	/// nodes auto-generated from high level nodes such as <see cref="Div>"/>, in which case the
-	/// additional nodes will be given incremental sequence numbers.
+	/// method is called, which allows for multiple frames on the same line as well as additional
+	/// frames auto-generated from high level frames such as <see cref="Div>"/>, in which case the
+	/// additional frames will be given incremental sequence numbers.
 	/// </para>
 	/// </remarks>
 	/// <example>
@@ -61,7 +61,7 @@ namespace Fuzzy.Components
 	{
 		#region Helper Types
 
-		enum BlockType
+		enum FrameType
 		{
 			Component,
 			Element,
@@ -72,7 +72,7 @@ namespace Fuzzy.Components
 
 		#region Fields
 
-		readonly Stack<BlockType> _blocks = new Stack<BlockType>();
+		readonly Stack<FrameType> _frames = new Stack<FrameType>();
 		readonly RenderTreeBuilder _builder = default!;
 		readonly bool _prettyPrint;
 		readonly int _initialIndent;
@@ -98,7 +98,7 @@ namespace Fuzzy.Components
 
 		public void Dispose()
 		{
-			if (_blocks.Any())
+			if (_frames.Any())
 				throw new InvalidOperationException("Unbalanced Close calls");
 
 			PrettyPrint();
@@ -201,7 +201,7 @@ namespace Fuzzy.Components
 				PrettyPrint(line);
 
 			_builder.OpenComponent(GetSequence(line), type);
-			_blocks.Push(BlockType.Component);
+			_frames.Push(FrameType.Component);
 
 			return this;
 		}
@@ -211,7 +211,7 @@ namespace Fuzzy.Components
 		{
 			PrettyPrint(line);
 			_builder.OpenComponent<TComponent>(GetSequence(line));
-			_blocks.Push(BlockType.Component);
+			_frames.Push(FrameType.Component);
 
 			return this;
 		}
@@ -283,7 +283,7 @@ namespace Fuzzy.Components
 				PrettyPrint(line);
 
 			_builder.OpenElement(GetSequence(line), name);
-			_blocks.Push(BlockType.Element);
+			_frames.Push(FrameType.Element);
 
 			return this;
 		}
@@ -320,7 +320,7 @@ namespace Fuzzy.Components
 				PrettyPrint(line);
 
 			_builder.OpenRegion(GetSequence(line));
-			_blocks.Push(BlockType.Region);
+			_frames.Push(FrameType.Region);
 
 			return this;
 		}
@@ -390,7 +390,7 @@ namespace Fuzzy.Components
 		#endregion Shortcuts
 
 		/// <summary>
-		/// Closes the current Region, Element or ContentComponent block.
+		/// Closes the current Region, Element or ContentComponent frame.
 		/// </summary>
 		/// <remarks>
 		/// Calls to this method must match calls to <see cref="Region(int)"/>,
@@ -400,15 +400,14 @@ namespace Fuzzy.Components
 		public FluentRenderTreeBuilder Close(bool prettyPrint = true,
 				[CallerLineNumber] int line = 0)
 		{
-			var type = _blocks.Pop();
 			if (prettyPrint)
 				PrettyPrint(line);
 
-			switch (type)
+			switch (_frames.Pop())
 			{
-				case BlockType.Region: _builder.CloseRegion(); break;
-				case BlockType.Element: _builder.CloseElement(); break;
-				case BlockType.Component: _builder.CloseComponent(); break;
+				case FrameType.Region: _builder.CloseRegion(); break;
+				case FrameType.Element: _builder.CloseElement(); break;
+				case FrameType.Component: _builder.CloseComponent(); break;
 			};
 
 			return this;
@@ -424,7 +423,7 @@ namespace Fuzzy.Components
 
 			_builder.AddMarkupContent(GetSequence(line),
 					(indentOnly ? "" : Environment.NewLine) +
-					new string('\t', _initialIndent + _blocks.Count + offset));
+					new string('\t', _initialIndent + _frames.Count + offset));
 		}
 
 		/// <summary>

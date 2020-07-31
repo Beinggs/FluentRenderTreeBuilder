@@ -1,35 +1,27 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 
-using Microsoft.AspNetCore.Components.Rendering;
-using Microsoft.Extensions.Logging;
-
 
 namespace Fuzzy.Components
 {
-	public static class BuilderExtensions
+	public static class FluentRenderTreeBuilderExtensions
 	{
-		public static FluentRenderTreeBuilder Build (this RenderTreeBuilder builder,
-				bool prettyPrint = true, int initialIndent = 0, int maxPerLine = 10, ILogger? logger = null)
-			=> new FluentRenderTreeBuilder(builder, prettyPrint, initialIndent, maxPerLine, logger);
-
 		public static FluentRenderTreeBuilder Element(this FluentRenderTreeBuilder frtb, string name,
-				string? @class = null, bool prettyPrint = true, [CallerLineNumber] int line = 0)
+				string? @class = null, string? id = null, bool prettyPrint = true,
+				[CallerLineNumber] int line = 0)
 		{
 			frtb.Element(name, prettyPrint, line);
+
+			if (id != null)
+				frtb.Attribute("id", id, line);
+
 			return @class == null ? frtb : Class(frtb, @class, line);
 		}
 
-		public static FluentRenderTreeBuilder Div(this FluentRenderTreeBuilder frtb, string? @class = null,
-				bool prettyPrint = true, [CallerLineNumber] int line = 0)
-			=> Element(frtb, "div", @class, prettyPrint, line);
-
-		public static FluentRenderTreeBuilder DivId(this FluentRenderTreeBuilder frtb, string id,
-				string? @class = null, bool prettyPrint = true, [CallerLineNumber] int line = 0)
-		{
-			Div (frtb, @class, prettyPrint, line);
-			return frtb.Attribute("id", id, line);
-		}
+		public static FluentRenderTreeBuilder Div(this FluentRenderTreeBuilder frtb,
+				string? @class = null, string? id = null, bool prettyPrint = true,
+				[CallerLineNumber] int line = 0)
+			=> Element(frtb, "div", @class, id, prettyPrint, line: line);
 
 		public static FluentRenderTreeBuilder Class(this FluentRenderTreeBuilder frtb, string value,
 				[CallerLineNumber] int line = 0)
@@ -67,10 +59,11 @@ namespace Fuzzy.Components
 				[CallerLineNumber] int line = 0)
 			=> frtb.Heading(6, content, line);
 
-		public static FluentRenderTreeBuilder P(this FluentRenderTreeBuilder frtb, string? content = null,
-				bool prettyPrint = true, [CallerLineNumber] int line = 0)
+		public static FluentRenderTreeBuilder P(this FluentRenderTreeBuilder frtb,
+				string? content = null, bool prettyPrint = true,
+				[CallerLineNumber] int line = 0)
 		{
-			frtb.Element("p", prettyPrint, line);
+			frtb.Element("p", prettyPrint, line: line);
 			return content == null ? frtb : frtb.Content(content, line: line);
 		}
 
