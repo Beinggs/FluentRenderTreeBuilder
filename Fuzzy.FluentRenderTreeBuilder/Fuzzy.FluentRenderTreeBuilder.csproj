@@ -27,6 +27,7 @@ All feedback and suggestions are welcome. Thank you for taking a look at FluentR
 
 Fuzzy Work Ltd.
 </PackageReleaseNotes>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -42,7 +43,6 @@ Fuzzy Work Ltd.
     <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="3.1.6" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.1.6" />
     <PackageReference Include="Microsoft.Extensions.Localization" Version="3.1.6" />
-    <PackageReference Include="Syncfusion.Blazor" Version="18.2.0.46" />
   </ItemGroup>
 
   <ItemGroup>
