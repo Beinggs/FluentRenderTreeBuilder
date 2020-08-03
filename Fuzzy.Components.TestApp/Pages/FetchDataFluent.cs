@@ -1,12 +1,13 @@
 ﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
-using Microsoft.AspNetCore.Components.Web;
 using Microsoft.Extensions.Logging;
 
 using Fuzzy.Components.TestApp.Data;
-using System.Threading.Tasks;
+
 
 namespace Fuzzy.Components.TestApp.Shared
 {
@@ -28,27 +29,82 @@ namespace Fuzzy.Components.TestApp.Shared
 			if (forecasts == null)
 			{
 				frtb.P("<em>Loading...</em>");
+				return;
 			}
-			else
-			{
-				frtb.TableHead("table")
-					.HeadCell("Date")
-					.HeadCell("Temp. (C)")
-					.HeadCell("Temp. (F)")
-					.HeadCell("Summary");
 
-				frtb.OpenTableBody();
+			frtb.TableHead("table")
+				.HeadCell("Date")
+				.HeadCell("Temp. (C)")
+				.HeadCell("Temp. (F)")
+				.HeadCell("Summary");
 
-				foreach (var forecast in forecasts)
-					frtb.OpenRow()
-							.Cell(forecast.Date.ToShortDateString())
-							.Cell(forecast.TemperatureC)
-							.Cell(forecast.TemperatureF)
-							.Cell(forecast.Summary)
-						.Close();
+			frtb.OpenTableBody();
 
-				frtb.CloseTableBody();
-			}
+			foreach (var forecast in forecasts)
+				frtb.OpenRow()
+						.Cell(forecast.Date.ToShortDateString())
+						.Cell(forecast.TemperatureC)
+						.Cell(forecast.TemperatureF)
+						.Cell(forecast.Summary)
+					.Close(); // row
+
+			frtb.CloseTableBody();
+
+			frtb.OpenDiv()
+					.P("")
+					.H3("Basic table example:")
+					.OpenTable()
+						.OpenRow()
+							.Cell("Row1, Cell1;")
+							.Cell("Row1, Cell2;")
+							.Cell("Row1, Cell3;")
+						.NewRow()
+							.Cell("Row2, Cell1;")
+							.Cell("Row2, Cell2;")
+							.Cell("Row2, Cell3;")
+						.NewRow()
+							.Cell("Row3, Cell1;")
+							.Cell("Row3, Cell2;")
+							.Cell("Row3, Cell3;")
+						.Close() // row
+					.Close() // table
+				.Close(); // div
+
+			frtb.OpenDiv()
+					.P("")
+					.H3("Auto-row table example:")
+					.OpenAutoTable()
+						.Cell("Row1, Cell1;")
+						.Cell("Row1, Cell2;")
+						.Cell("Row1, Cell3;")
+					.NewRow()
+						.Cell("Row2, Cell1;")
+						.Cell("Row2, Cell2;")
+						.Cell("Row2, Cell3;")
+					.NewRow()
+						.Cell("Row3, Cell1;")
+						.Cell("Row3, Cell2;")
+						.Cell("Row3, Cell3;")
+					.CloseAutoTable()
+				.Close(); // div
+
+			frtb.OpenDiv()
+					.P("")
+					.H3("Looping table example:")
+					.OpenTable();
+
+					foreach (var row in Enumerable.Range (1, 4))
+					{
+						frtb.OpenRow();
+
+						foreach (var cell in Enumerable.Range(1, 4))
+							frtb.Cell($"Row{row}, Cell{cell};").SameLine();
+
+						frtb.Close(); // row
+					}
+
+				frtb.Close() // table
+				.Close(); // div
 		}
 
 		WeatherForecast[]? forecasts;
