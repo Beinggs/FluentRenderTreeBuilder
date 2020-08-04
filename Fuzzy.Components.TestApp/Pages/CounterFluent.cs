@@ -12,22 +12,21 @@ namespace Fuzzy.Components.TestApp.Shared
 	public partial class CounterFluent: ComponentBase
 	{
 		[Inject]
-		ILogger<FluentRenderTreeBuilder>? FrtbLogger { get; set; }
+		ILogger<CounterFluent>? Logger { get; set; }
+
+		int _currentCount = 0;
 
 		protected override void BuildRenderTree(RenderTreeBuilder builder)
-			=> builder.Build(logger: FrtbLogger)
+			=> builder.Build(logger: Logger)
 				.H1("Fluent Counter")
 				.NewLine()
-				.OpenP().Content("Current count: ").Content(currentCount).CloseInline()
+				.OpenP().Content("Current count: ").Content(_currentCount).CloseInline()
 				.NewLine()
 				.OpenElement("button", "btn btn-primary")
 					.Attribute("onclick", EventCallback.Factory.Create<MouseEventArgs>(this, IncrementCount))
 					.Content("Click me").CloseInline();
 
-		int currentCount = 0;
-
 		void IncrementCount()
-			=> currentCount++;
-
+			=> _currentCount++;
 	}
 }

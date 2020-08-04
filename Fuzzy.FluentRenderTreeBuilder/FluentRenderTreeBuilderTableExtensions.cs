@@ -19,12 +19,12 @@ namespace Fuzzy.Components
 		/// <see cref="FluentRenderTreeBuilder.Close">Close</see>.
 		/// </remarks>
 		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
-		/// <param name="tableClass">The optional CSS class name for the table.</param>
-		/// <param name="tableId">The optional id attribute value.</param>
+		/// <param name="class">The optional CSS class name for the table.</param>
+		/// <param name="id">The optional id attribute value.</param>
 		/// <param name="line">The source code line number used to generate the sequence number.</param>
 		public static FluentRenderTreeBuilder OpenTable(this FluentRenderTreeBuilder frtb,
-				string? tableClass = null, string? tableId = null, [CallerLineNumber] int line = 0)
-			=> frtb.OpenElement("table", tableClass, tableId, line: line);
+				string? @class = null, string? id = null, [CallerLineNumber] int line = 0)
+			=> frtb.OpenElement("table", @class, id, line: line);
 
 		/// <summary>
 		/// Opens a <c>&lt;table&gt;</c> block, adding the given id and CSS class attributes if
@@ -33,7 +33,7 @@ namespace Fuzzy.Components
 		/// </summary>
 		/// <remarks>
 		/// Note: Each call to this method must be matched with a call to
-		/// <see cref="FluentRenderTreeBuilder.Close">Close</see>.
+		/// <see cref="CloseAutoTable">CloseAutoTable</see>.
 		/// </remarks>
 		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
 		/// <param name="tableClass">The optional CSS class name for the table.</param>
@@ -55,11 +55,11 @@ namespace Fuzzy.Components
 		/// <see cref="FluentRenderTreeBuilder.Close">Close</see>.
 		/// </remarks>
 		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
-		/// <param name="rowClass">The optional CSS class name for the first table row.</param>
+		/// <param name="class">The optional CSS class name for the table row.</param>
 		/// <param name="line">The source code line number used to generate the sequence number.</param>
 		public static FluentRenderTreeBuilder OpenRow(this FluentRenderTreeBuilder frtb,
-				string? rowClass = null, [CallerLineNumber] int line = 0)
-			=> frtb.OpenElement("tr", rowClass, line: line);
+				string? @class = null, [CallerLineNumber] int line = 0)
+			=> frtb.OpenElement("tr", @class, line: line);
 
 		/// <summary>
 		/// Opens a <c>&lt;td&gt;</c> block, adding the given CSS class attribute if provided.
@@ -93,13 +93,13 @@ namespace Fuzzy.Components
 		/// after first closing the currently open row.
 		/// </summary>
 		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
-		/// <param name="rowClass">The optional CSS class name for the first table row.</param>
+		/// <param name="class">The optional CSS class name for the new table row.</param>
 		/// <param name="line">The source code line number used to generate the sequence number.</param>
 		public static FluentRenderTreeBuilder NewRow(this FluentRenderTreeBuilder frtb,
-				string? rowClass = null, [CallerLineNumber] int line = 0)
+				string? @class = null, [CallerLineNumber] int line = 0)
 			=> frtb
 				.Close(line: line) // TR
-				.OpenRow(rowClass, line);
+				.OpenRow(@class, line);
 
 		/// <summary>
 		/// Closes the currently open row and the currently open table.
@@ -125,7 +125,7 @@ namespace Fuzzy.Components
 		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
 		/// <param name="tableClass">The optional CSS class name for the table.</param>
 		/// <param name="tableId">The optional id attribute value.</param>
-		/// <param name="rowClass">The optional CSS class name for the first table row.</param>
+		/// <param name="rowClass">The optional CSS class name for the table head row.</param>
 		/// <param name="line">The source code line number used to generate the sequence number.</param>
 		public static FluentRenderTreeBuilder TableHead(this FluentRenderTreeBuilder frtb,
 				string? tableClass = null, string? tableId = null, string? rowClass = null,

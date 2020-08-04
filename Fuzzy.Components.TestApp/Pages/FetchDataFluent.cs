@@ -15,18 +15,20 @@ namespace Fuzzy.Components.TestApp.Shared
 	public partial class FetchDataFluent: ComponentBase
 	{
 		[Inject]
-		ILogger<FluentRenderTreeBuilder>? FrtbLogger { get; set; }
+		ILogger<FetchDataFluent>? Logger { get; set; }
 
 		[Inject]
 		WeatherForecastService ForecastService { get; set; } = default!;
 
+		WeatherForecast[]? _forecasts;
+
 		protected override void BuildRenderTree(RenderTreeBuilder builder)
 		{
-			var frtb = builder.Build(logger: FrtbLogger)
+			var frtb = builder.Build(logger: Logger)
 				.H1("Weather forecast")
 				.P("This component demonstrates fetching data from a service.");
 
-			if (forecasts == null)
+			if (_forecasts == null)
 			{
 				frtb.P("<em>Loading...</em>");
 				return;
@@ -40,7 +42,7 @@ namespace Fuzzy.Components.TestApp.Shared
 
 			frtb.OpenTableBody();
 
-			foreach (var forecast in forecasts)
+			foreach (var forecast in _forecasts)
 				frtb.OpenRow()
 						.Cell(forecast.Date.ToShortDateString())
 						.Cell(forecast.TemperatureC)
@@ -107,9 +109,7 @@ namespace Fuzzy.Components.TestApp.Shared
 				.Close(); // div
 		}
 
-		WeatherForecast[]? forecasts;
-
 		protected override async Task OnInitializedAsync()
-			=> forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
+			=> _forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
 	}
 }
