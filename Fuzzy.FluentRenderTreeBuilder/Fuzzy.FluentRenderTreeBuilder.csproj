@@ -27,7 +27,7 @@ All feedback and suggestions are welcome. Thank you for taking a look at FluentR
 
 Fuzzy Work Ltd.
 </PackageReleaseNotes>
-	<Version>1.0.1</Version>
+	<Version>1.1.0</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

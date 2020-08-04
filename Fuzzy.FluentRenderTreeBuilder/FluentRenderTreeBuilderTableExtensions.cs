@@ -89,8 +89,8 @@ namespace Fuzzy.Components
 			=> frtb.Element("td", markup, @class, null, line: line);
 
 		/// <summary>
-		/// Closes the currently open row and opens a new <c>&lt;tr&gt;</c> block, adding the
-		/// given CSS class attribute if provided.
+		/// Opens a new <c>&lt;tr&gt;</c> block, adding the given CSS class attribute if provided,
+		/// after first closing the currently open row.
 		/// </summary>
 		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
 		/// <param name="rowClass">The optional CSS class name for the first table row.</param>
@@ -117,7 +117,7 @@ namespace Fuzzy.Components
 		/// </summary>
 		/// <remarks>
 		/// Note: this method must be used with a subsequent
-		/// <see cref="OpenTable">OpenTableBody</see>
+		/// <see cref="OpenTableBody">OpenTableBody</see>
 		/// call and a matching
 		/// <see cref="CloseTableBody">CloseTableBody</see>
 		/// call.
