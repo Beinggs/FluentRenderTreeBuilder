@@ -1,23 +1,23 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
-    <RazorLangVersion>3.0</RazorLangVersion>
-    <Nullable>enable</Nullable>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <Description>A fluent RenderTreeBuilder for Blazor Server and WebAssembly</Description>
-    <Authors>Fuzzy Team</Authors>
-    <Company>Fuzzy Work Ltd.</Company>
-    <Copyright>Fuzzy Work Ltd.</Copyright>
-    <PackageId>Fuzzy.Blazor.FluentRenderTreeBuilder</PackageId>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/Fuzzy-Work/FluentRenderTreeBuilder</PackageProjectUrl>
-    <PackageIcon>Fuzzy.Blazor.png</PackageIcon>
-    <RepositoryUrl>https://github.com/Fuzzy-Work/FluentRenderTreeBuilder</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <PackageTags>Blazor, components, component, library, fluent, RenderTreeBuilder</PackageTags>
-    <PackageReleaseNotes>The FluentRenderTreeBuilder wraps the built-in RenderTreeBuilder with a clean and fluent API for building Blazor components in pure C# code, and automatically generates source line based sequence numbers. See the examples pages and components in the test app provided in the source code repo on GitHub for more details.
+	<TargetFramework>netstandard2.1</TargetFramework>
+	<RazorLangVersion>3.0</RazorLangVersion>
+	<Nullable>enable</Nullable>
+	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+	<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+	<Description>A fluent RenderTreeBuilder for Blazor Server and WebAssembly</Description>
+	<Authors>Fuzzy Team</Authors>
+	<Company>Fuzzy Work Ltd.</Company>
+	<Copyright>Fuzzy Work Ltd.</Copyright>
+	<PackageId>Fuzzy.Blazor.FluentRenderTreeBuilder</PackageId>
+	<PackageLicenseExpression>MIT</PackageLicenseExpression>
+	<PackageProjectUrl>https://github.com/Fuzzy-Work/FluentRenderTreeBuilder</PackageProjectUrl>
+	<PackageIcon>Fuzzy.Blazor.png</PackageIcon>
+	<RepositoryUrl>https://github.com/Fuzzy-Work/FluentRenderTreeBuilder</RepositoryUrl>
+	<RepositoryType>git</RepositoryType>
+	<PackageTags>Blazor, components, component, library, fluent, RenderTreeBuilder</PackageTags>
+	<PackageReleaseNotes>The FluentRenderTreeBuilder wraps the built-in RenderTreeBuilder with a clean and fluent API for building Blazor components in pure C# code, and automatically generates source line based sequence numbers. See the examples pages and components in the test app provided in the source code repo on GitHub for more details.
 
 When using the FluentRenderTreeBuilder, developers don't have to manually provide and maintain the sequence numbers or hand-write repetitive calls to the built-in RenderTreeBuilder.
 
@@ -27,29 +27,37 @@ All feedback and suggestions are welcome. Thank you for taking a look at FluentR
 
 Fuzzy Work Ltd.
 </PackageReleaseNotes>
-    <Version>1.0.1</Version>
+	<Version>1.1.0</Version>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+	<DocumentationFile>obj/Debug/Fuzzy.FluentRenderTreeBuilder.xml</DocumentationFile>
+  </PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<DocumentationFile>obj/Release.Fuzzy.FluentRenderTreeBuilder.xml</DocumentationFile>
+	</PropertyGroup>
+
   <ItemGroup>
-    <Compile Remove="Shared\MainLayoutOld.razor.cs" />
+	<Compile Remove="Shared\MainLayoutOld.razor.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Remove="Shared\MainLayoutOld.razor" />
+	<Content Remove="Shared\MainLayoutOld.razor" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.1.6" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="3.1.6" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.1.6" />
-    <PackageReference Include="Microsoft.Extensions.Localization" Version="3.1.6" />
+	<PackageReference Include="Microsoft.AspNetCore.Components" Version="3.1.6" />
+	<PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="3.1.6" />
+	<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.1.6" />
+	<PackageReference Include="Microsoft.Extensions.Localization" Version="3.1.6" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Fuzzy.Blazor.png">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
+	<None Include="Fuzzy.Blazor.png">
+	  <Pack>True</Pack>
+	  <PackagePath></PackagePath>
+	</None>
   </ItemGroup>
 
 </Project>

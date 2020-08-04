@@ -9,13 +9,13 @@ namespace Fuzzy.Components.TestApp.Shared
 {
 	public partial class MainLayoutFluent: LayoutComponentBase
 	{
-		//[Inject]
-		//ILogger<FluentRenderTreeBuilder>? FrtbLogger { get; set; }
+		[Inject]
+		ILogger<FluentRenderTreeBuilder>? FrtbLogger { get; set; }
 
 		const string _aboutLink = "<a href='https://docs.microsoft.com/aspnet/' target='_blank'>About</a>";
 
 		protected override void BuildRenderTree(RenderTreeBuilder builder)
-			=> builder.Build()//logger: FrtbLogger)
+			=> builder.Build(logger: FrtbLogger)
 				.ComponentDiv<NavMenu>("sidebar")
 				.NewLine()
 				.OpenDiv("main", "body")
