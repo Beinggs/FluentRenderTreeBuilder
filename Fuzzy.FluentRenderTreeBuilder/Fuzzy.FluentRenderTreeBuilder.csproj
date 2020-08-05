@@ -17,17 +17,27 @@
 	<RepositoryUrl>https://github.com/Fuzzy-Work/FluentRenderTreeBuilder</RepositoryUrl>
 	<RepositoryType>git</RepositoryType>
 	<PackageTags>Blazor, components, component, library, fluent, RenderTreeBuilder</PackageTags>
-	<PackageReleaseNotes>The FluentRenderTreeBuilder wraps the built-in RenderTreeBuilder with a clean and fluent API for building Blazor components in pure C# code, and automatically generates source line based sequence numbers. See the example pages and components in the test app provided in the source code repo on GitHub for more details.
+	<PackageReleaseNotes>Version history:
 
-When using the FluentRenderTreeBuilder developers don't have to manually provide and maintain the sequence numbers or hand-write repetitive calls to the built-in RenderTreeBuilder.
+1.1.1
+- Updated readme and release notes.
 
-The resulting markup code is identical to the razor compiler output, with minor whitespace differences, and optionally output can be automatically minified by disabling the built-in 'pretty printing' feature, which is enabled by default to match the behaviour of Blazor's razor page compiler.
+1.1.0
+- Added full code documentation.
+- Added list extension methods for list generation.
+- Added more example code.
 
-All feedback and suggestions are welcome. Thank you for taking a look at FluentRenderTreeBuilder!
+1.0.1
+- Removed an unnecessary dependency.
 
+1.0.0
+- Initial release.
+
+
+Thanks for checking it out!
 Fuzzy Work Ltd.
 </PackageReleaseNotes>
-	<Version>1.1.0</Version>
+	<Version>1.1.1</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
