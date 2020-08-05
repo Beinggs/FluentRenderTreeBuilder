@@ -29,17 +29,10 @@ namespace Fuzzy.Components
 		public static FluentRenderTreeBuilder OpenElement(this FluentRenderTreeBuilder frtb, string name,
 				string? @class = null, string? id = null, bool prettyPrint = true,
 				[CallerLineNumber] int line = 0)
-		{
-			frtb.OpenElement(name, prettyPrint, line);
-
-			if (id != null)
-				frtb.Id(id, line);
-
-			if (@class != null)
-				frtb.Class(@class, line);
-
-			return frtb;
-		}
+			=> frtb
+				.OpenElement(name, prettyPrint, line)
+					.Id(id, line)
+					.Class(@class, line);
 
 		/// <summary>
 		/// Generates a block containing the given markup, adding the given id and CSS class
@@ -71,19 +64,12 @@ namespace Fuzzy.Components
 		public static FluentRenderTreeBuilder Element(this FluentRenderTreeBuilder frtb, string name,
 				object markup, string? @class = null, string? id = null, bool? prettyPrint = null,
 				[CallerLineNumber] int line = 0)
-		{
-			frtb.OpenElement(name, prettyPrint ?? true, line);
-
-			if (id != null)
-				frtb.Id(id, line);
-
-			if (@class != null)
-				frtb.Class(@class, line);
-
-			return frtb
-				.Markup(markup, prettyPrint ?? false, line)
+			=> frtb
+				.OpenElement(name, prettyPrint ?? true, line)
+					.Id(id, line)
+					.Class(@class, line)
+					.Markup(markup, prettyPrint ?? false, line)
 				.Close(prettyPrint ?? false, line);
-		}
 
 		/// <summary>
 		/// Generates a block containing the given content, adding the given id and CSS class
@@ -105,19 +91,12 @@ namespace Fuzzy.Components
 		public static FluentRenderTreeBuilder ContentElement(this FluentRenderTreeBuilder frtb, string name,
 				RenderFragment fragment, string? @class = null, string? id = null,
 				bool prettyPrint = true, [CallerLineNumber] int line = 0)
-		{
-			frtb.OpenElement(name, prettyPrint, line);
-
-			if (id != null)
-				frtb.Id(id, line);
-
-			if (@class != null)
-				frtb.Class(@class, line);
-
-			return frtb
-				.Content(fragment, prettyPrint, line)
+			=> frtb
+				.OpenElement(name, prettyPrint, line)
+					.Id(id, line)
+					.Class(@class, line)
+					.Content(fragment, prettyPrint, line)
 				.Close(prettyPrint, line);
-		}
 
 		/// <summary>
 		/// Generates a block containing a component of the given type, adding the given id and
@@ -169,6 +148,53 @@ namespace Fuzzy.Components
 				.OpenElement(name, @class, id, prettyPrint, line: line)
 				.Component<TComponent>(prettyPrint, line)
 				.Close(prettyPrint, line);
+
+		/// <summary>
+		/// Opens a component, adding the given id and CSS class attributes if provided.
+		/// </summary>
+		/// <remarks>
+		/// Note: Each call to this method must be matched with a call to
+		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close</see>.
+		/// </remarks>
+		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
+		/// <param name="type">The <see cref="Type"/> of the component to open.</param>
+		/// <param name="class">The optional CSS class name.</param>
+		/// <param name="id">The optional id attribute value.</param>
+		/// <param name="prettyPrint"><c>false</c> to prevent insertion of newline and indent
+		/// whitespace before the markup for this element, even if pretty-printing is enabled (see
+		/// the <see cref="FluentRenderTreeBuilder"/> overview for details on pretty-printing).</param>
+		/// <param name="line">The source code line number used to generate the sequence number.</param>
+		public static FluentRenderTreeBuilder OpenComponent(this FluentRenderTreeBuilder frtb, Type type,
+				string? @class = null, string? id = null, bool prettyPrint = true,
+				[CallerLineNumber] int line = 0)
+			=> frtb
+				.OpenComponent(type, prettyPrint, line)
+					.Id(id, line)
+					.Class(@class, line);
+
+		/// <summary>
+		/// Opens a component, adding the given id and CSS class attributes if provided.
+		/// </summary>
+		/// <remarks>
+		/// Note: Each call to this method must be matched with a call to
+		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close</see>.
+		/// </remarks>
+		/// <typeparam name="TComponent">The <see cref="Type"/> of the component to open.</typeparam>
+		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
+		/// <param name="class">The optional CSS class name.</param>
+		/// <param name="id">The optional id attribute value.</param>
+		/// <param name="prettyPrint"><c>false</c> to prevent insertion of newline and indent
+		/// whitespace before the markup for this element, even if pretty-printing is enabled (see
+		/// the <see cref="FluentRenderTreeBuilder"/> overview for details on pretty-printing).</param>
+		/// <param name="line">The source code line number used to generate the sequence number.</param>
+		public static FluentRenderTreeBuilder OpenComponent<TComponent>(this FluentRenderTreeBuilder frtb,
+				string? @class = null, string? id = null, bool prettyPrint = true,
+				[CallerLineNumber] int line = 0)
+			where TComponent : IComponent
+			=> frtb
+				.OpenComponent<TComponent>(prettyPrint, line)
+					.Id(id, line)
+					.Class(@class, line);
 
 		/// <summary>
 		/// Generates a Component block of the given component type.
@@ -313,22 +339,28 @@ namespace Fuzzy.Components
 		/// <summary>
 		/// Adds a CSS <c>class</c> attribute.
 		/// </summary>
+		/// <remarks>
+		/// Passing in a null or empty <paramref name="name"/> results in no attribute being generated.
+		/// </remarks>
 		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
 		/// <param name="name">The class name.</param>
 		/// <param name="line">The source code line number used to generate the sequence number.</param>
-		public static FluentRenderTreeBuilder Class(this FluentRenderTreeBuilder frtb, string name,
+		public static FluentRenderTreeBuilder Class(this FluentRenderTreeBuilder frtb, string? name,
 				[CallerLineNumber] int line = 0)
-			=> frtb.Attribute("class", name, line);
+			=> string.IsNullOrEmpty(name) ? frtb : frtb.Attribute("class", name, line);
 
 		/// <summary>
 		/// Adds an <c>id</c> attribute.
 		/// </summary>
+		/// <remarks>
+		/// Passing in a null or empty <paramref name="value"/> results in no attribute being generated.
+		/// </remarks>
 		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
 		/// <param name="value">The id value.</param>
 		/// <param name="line">The source code line number used to generate the sequence number.</param>
-		public static FluentRenderTreeBuilder Id(this FluentRenderTreeBuilder frtb, string value,
+		public static FluentRenderTreeBuilder Id(this FluentRenderTreeBuilder frtb, string? value,
 				[CallerLineNumber] int line = 0)
-			=> frtb.Attribute("id", value, line);
+			=> string.IsNullOrEmpty(value) ? frtb : frtb.Attribute("id", value, line);
 
 		/// <summary>
 		/// Adds a <c>data-[name]</c> attribute.
