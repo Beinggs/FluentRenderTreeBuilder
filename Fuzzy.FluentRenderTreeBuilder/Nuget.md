@@ -11,20 +11,20 @@ Taking an example from [Chris Sainty's blog](https://chrissainty.com/building-co
 ```csharp
 protected override void BuildRenderTree(RenderTreeBuilder builder)
 {
-	base.BuildRenderTree(builder);
-	builder.OpenElement(0, "nav");
-	builder.AddAttribute(1, "class", "menu");
-		
-	builder.OpenElement(2, "ul");
-	builder.OpenElement(3, "li");
-	builder.OpenComponent<NavLink>(4);
-	builder.AddAttribute(5, "href", "/");
-	builder.AddAttribute(6, "Match", NavLinkMatch.All);
-	builder.AddAttribute(7, "ChildContent", (RenderFragment)((builder2) => {
-			builder2.AddContent(8, "Home");
-	}));
-	builder.CloseComponent();
-	builder.CloseElement();
+    base.BuildRenderTree(builder);
+    builder.OpenElement(0, "nav");
+    builder.AddAttribute(1, "class", "menu");
+        
+    builder.OpenElement(2, "ul");
+    builder.OpenElement(3, "li");
+    builder.OpenComponent<NavLink>(4);
+    builder.AddAttribute(5, "href", "/");
+    builder.AddAttribute(6, "Match", NavLinkMatch.All);
+    builder.AddAttribute(7, "ChildContent", (RenderFragment)((builder2) => {
+            builder2.AddContent(8, "Home");
+    }));
+    builder.CloseComponent();
+    builder.CloseElement();
 }
 ```
 
@@ -32,16 +32,16 @@ can now be written as:
 
 ```csharp
 protected override void BuildRenderTree(RenderTreeBuilder builder)
-	=> builder.Build()
-		.OpenElement("nav", "menu")
-			.OpenAutoList()
-				.OpenComponent<NavLink>()
-					.Attribute("href", "/")
-					.Attribute("Match", NavLinkMatch.All)
-					.ChildContent("Home")
-				.Close()
-			.CloseAutoList()
-		.Close();
+    => builder.Build()
+        .OpenElement("nav", "menu")
+            .OpenAutoList()
+                .OpenComponent<NavLink>()
+                    .Attribute("href", "/")
+                    .Attribute("Match", NavLinkMatch.All)
+                    .ChildContent("Home")
+                .Close()
+            .CloseAutoList()
+        .Close();
 ```
 There are many new convenience methods and parameters provided, such as automatically generating `id` and `class` attributes from optional parameters to `OpenElement`, as shown above with the `menu` CSS class.
 
@@ -53,14 +53,14 @@ Extension methods can be used to add new high-level functionality, and many are 
 For example, an extension method to automatically generate `NavLink` content might look like this:
 ```csharp
 public static FluentRenderTreeBuilder NavLink(this FluentRenderTreeBuilder frtb,
-		string url, string markup, NavLinkMatch match = NavLinkMatch.All,
-		string? @class = null, string? id = null)
-	=> frtb.OpenComponent<NavLink>(@class ?? "nav-link", id)
-			.Attribute("href", url)
-			.Attribute("Match", match)
-			.ChildContent((MarkupString) markup, prettyPrint: true)
-			.NewLine(prettyPrint: true)
-		.Close();
+        string url, string markup, NavLinkMatch match = NavLinkMatch.All,
+        string? @class = null, string? id = null)
+    => frtb.OpenComponent<NavLink>(@class ?? "nav-link", id)
+            .Attribute("href", url)
+            .Attribute("Match", match)
+            .ChildContent((MarkupString) markup, prettyPrint: true)
+            .NewLine(prettyPrint: true)
+        .Close();
 ```
 This would then allow everything from the `OpenComponent<NavLink>()` call to its matching `Close()` call in the above code snippet to be replaced by a single call to `NavLink("/", "Home")`, making navigation list generation possible with just a few lines of code.
 
