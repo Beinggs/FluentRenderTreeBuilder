@@ -19,6 +19,17 @@
 	<PackageTags>Blazor, components, component, library, fluent, RenderTreeBuilder</PackageTags>
 	<PackageReleaseNotes>Version history:
 
+2.0.0
+- Added `key` parameter on various methods for automatic generation of `SetKey()` calls.
+- Added `Break()` to generate `<br />`.
+- Added `Close(n)` to close multiple nested blocks.
+- Added `CloseAll()` to close all open blocks.
+- Added `CloseHelper()` to allow methods generating composite content to handle their own block closing.
+- BREAKING CHANGE: removed `CloseAutoTable`, `CloseTableBody`, `CloseAutoList` (now replaced with `CloseHelper`s).
+- Improved example code.
+- Improved logging output.
+- Updated documentation.
+
 1.1.1
 - Updated readme and release notes.
 
@@ -37,7 +48,7 @@
 Thanks for checking it out!
 Fuzzy Work Ltd.
 </PackageReleaseNotes>
-	<Version>1.1.1</Version>
+	<Version>2.0.0</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

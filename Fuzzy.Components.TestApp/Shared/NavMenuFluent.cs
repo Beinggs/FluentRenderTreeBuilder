@@ -35,18 +35,17 @@ namespace Fuzzy.Components.TestApp.Shared
 					.OpenElement("button", _buttonClass)
 						.OnClick(this, ToggleNavMenu)
 						.Markup(_topContent, prettyPrint: true)
-					.Close()
-				.Close()
+				.Close(2) // button, div
 				.NewLine()
-				.OpenDiv(NavMenuCssClass)
+				.OpenElement("nav", NavMenuCssClass)
 					.OnClick(this, ToggleNavMenu)
-					.Menu(_listClass, _itemClass,
+					.Menu(_listClass, _itemClass, "nav-link",
 							("", "home", "Home"),
 							("counter", "plus", "Counter"),
 							("fluent-counter", "plus", "Fluent Counter"),
 							("fetchdata", "list-rich", "Fetch data"),
 							("fluent-fetchdata", "list-rich", "Fluent Fetch data"))
-				.Close();
+				.Close(); // div
 
 		void ToggleNavMenu()
 			=> _collapseNavMenu = !_collapseNavMenu;

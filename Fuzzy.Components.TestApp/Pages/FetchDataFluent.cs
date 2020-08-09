@@ -24,36 +24,38 @@ namespace Fuzzy.Components.TestApp.Shared
 
 		protected override void BuildRenderTree(RenderTreeBuilder builder)
 		{
-			var frtb = builder.Build(logger: Logger)
+			var fluentBuilder = builder.Build(logger: Logger)
 				.H1("Weather forecast")
 				.P("This component demonstrates fetching data from a service.");
 
 			if (_forecasts == null)
 			{
-				frtb.P("<em>Loading...</em>");
+				fluentBuilder.P("<em>Loading...</em>");
 				return;
 			}
 
-			frtb.TableHead("table")
-				.HeadCell("Date")
-				.HeadCell("Temp. (C)")
-				.HeadCell("Temp. (F)")
-				.HeadCell("Summary");
+			fluentBuilder
+				.TableHead("table")
+					.HeadCell("Date")
+					.HeadCell("Temp. (C)")
+					.HeadCell("Temp. (F)")
+					.HeadCell("Summary")
+				.OpenTableBody();
 
-			frtb.OpenTableBody();
+				foreach (var forecast in _forecasts)
+					fluentBuilder
+						.OpenRow()
+							.Cell(forecast.Date.ToShortDateString())
+							.Cell(forecast.TemperatureC)
+							.Cell(forecast.TemperatureF)
+							.Cell(forecast.Summary)
+						.Close(); // row
 
-			foreach (var forecast in _forecasts)
-				frtb.OpenRow()
-						.Cell(forecast.Date.ToShortDateString())
-						.Cell(forecast.TemperatureC)
-						.Cell(forecast.TemperatureF)
-						.Cell(forecast.Summary)
-					.Close(); // row
+			fluentBuilder.Close(); // table body (which closes table too, via OpenTableBody's CloseHelper)
 
-			frtb.CloseTableBody();
-
-			frtb.OpenDiv()
-					.P("")
+			fluentBuilder
+				.OpenDiv()
+					.Break()
 					.H3("Basic table example:")
 					.OpenTable()
 						.OpenRow()
@@ -68,12 +70,11 @@ namespace Fuzzy.Components.TestApp.Shared
 							.Cell("Row3, Cell1;")
 							.Cell("Row3, Cell2;")
 							.Cell("Row3, Cell3;")
-						.Close() // row
-					.Close() // table
-				.Close(); // div
+				.Close(3); // row, table, div
 
-			frtb.OpenDiv()
-					.P("")
+			fluentBuilder
+				.OpenDiv()
+					.Break()
 					.H3("Auto-row table example:")
 					.OpenAutoTable()
 						.Cell("Row1, Cell1;")
@@ -87,26 +88,34 @@ namespace Fuzzy.Components.TestApp.Shared
 						.Cell("Row3, Cell1;")
 						.Cell("Row3, Cell2;")
 						.Cell("Row3, Cell3;")
-					.CloseAutoTable()
-				.Close(); // div
+				.Close(2); // auto-table, div
 
-			frtb.OpenDiv()
-					.P("")
+			fluentBuilder
+				.OpenDiv()
+					.Break()
 					.H3("Looping table example:")
 					.OpenTable();
 
+					var rowNum = 1;
 					foreach (var row in Enumerable.Range (1, 4))
 					{
-						frtb.OpenRow();
+						fluentBuilder.OpenRow();
 
+						var cellNum = 1;
 						foreach (var cell in Enumerable.Range(1, 4))
-							frtb.Cell($"Row{row}, Cell{cell};").SameLine();
+						{
+							// typically a key would be a meaningful cell identifier,
+							// e.g. name, order number, etc., but for demonstration
+							// purposes we're just generating it from row and cell numbers
+							var key = $"r{rowNum}c{cellNum++}";
 
-						frtb.Close(); // row
+							fluentBuilder.Cell($"Row{row}, Cell{cell};", $"cell-{key}", key);
+						}
+
+						fluentBuilder.Close(); // row
 					}
 
-				frtb.Close() // table
-				.Close(); // div
+			fluentBuilder.CloseAll(); // table, div
 		}
 
 		protected override async Task OnInitializedAsync()
