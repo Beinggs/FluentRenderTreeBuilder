@@ -22,6 +22,6 @@ namespace Fuzzy.Components.TestApp.Shared
 				.OpenDiv("main", "body")
 					.Div(_aboutLink, "top-row px-4")
 					.ContentDiv(Body, "content px-4")
-				.Close(); // div
+				.Close();
 	}
 }
