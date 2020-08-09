@@ -9,7 +9,7 @@ namespace Fuzzy.Components.TestApp.Extensions
 	/// <summary>
 	/// Provides extension methods to help generate navigation content.
 	/// </summary>
-	public static class FluentRenderTreeBuilderNavExtensions
+	public static class FrtbNavExtensions
 	{
 		const string _menuItemMarkup = "<span class=\"oi oi-{0}\" aria-hidden=\"true\"></span> {1}";
 
