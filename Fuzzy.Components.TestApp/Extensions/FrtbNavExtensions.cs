@@ -14,10 +14,9 @@ namespace Fuzzy.Components.TestApp.Extensions
 		const string _menuItemMarkup = "<span class=\"oi oi-{0}\" aria-hidden=\"true\"></span> {1}";
 
 		/// <summary>
-		/// Generates a <see cref="NavLink"/> component, adding the given href and Match
-		/// attributes, and the given id, CSS class and active CSS class attributes to the
-		/// component and setting its key, if provided; then adding a <c>ChildContent</c>
-		/// attribute for the given markup text.
+		/// Generates a <see cref="NavLink"/> component, adding the given href, Match, CSS class
+		/// (defaulting to "nav-link") and ActiveClass attributes, if given; then adding a
+		/// <c>ChildContent</c> attribute for the given markup text.
 		/// </summary>
 		/// <param name="fluentBuilder"></param>
 		/// <param name="href"></param>
@@ -31,9 +30,9 @@ namespace Fuzzy.Components.TestApp.Extensions
 				.OpenComponent<NavLink>(@class ?? "nav-link")
 					.MultipleAttributes(new (string, object) []
 						{
-							("ActiveClass", activeClass!),
 							("href", href),
-							("Match", href == "" ? NavLinkMatch.All : NavLinkMatch.Prefix)
+							("Match", href == "" ? NavLinkMatch.All : NavLinkMatch.Prefix),
+							("ActiveClass", activeClass!)
 						})
 					.ChildContent((MarkupString) markup.ToString(), prettyPrint: true)
 				.Close();
