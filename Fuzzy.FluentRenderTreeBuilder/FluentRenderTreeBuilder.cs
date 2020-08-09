@@ -846,7 +846,7 @@ namespace Fuzzy.Components
 				if (_logger?.IsEnabled(LogLevel.Information) ?? false)
 				{
 					var (type, name) = _frames.Peek();
-					_logger?.LogInformation($"SetKey: Value {value}; reset sequence number to {_sequence}" +
+					_logger.LogInformation($"SetKey: Value {value}; reset sequence number to {_sequence}" +
 							$"{(type == FrameType.Element ? $" for element {name}" : "")}");
 				}
 			}
@@ -936,7 +936,7 @@ namespace Fuzzy.Components
 			// pop this first so PrettyPrint below produces the correct indent
 			var (frameType, name, closeHelper) = _frames.Pop();
 
-			_logger.LogInformation($"DoClose: Closing {frameType} {name}");
+			_logger?.LogInformation($"DoClose: Closing {frameType} {name}");
 
 			if (prettyPrint && frameType != FrameType.Region && frameType != FrameType.CloseHelper)
 				PrettyPrint(line);
@@ -1060,7 +1060,7 @@ namespace Fuzzy.Components
 				if (info == "" && !string.IsNullOrEmpty(name))
 					info = "in";
 
-				_logger?.LogInformation($"GetSequence: Sequence number {_sequence} " +
+				_logger.LogInformation($"GetSequence: Sequence number {_sequence} " +
 						$"generated for {info} {name}");
 			}
 
