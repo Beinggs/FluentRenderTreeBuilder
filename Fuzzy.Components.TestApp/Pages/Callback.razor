@@ -1,0 +1,18 @@
+﻿@page "/callback"
+
+
+<h1>Callback Page</h1>
+<br />
+<p>Message: @_message</p>
+
+<hr />
+
+<CallbackComponent SayHello="SayHello" Name="Alice" />
+
+@code{
+
+	string? _message;
+
+	public void SayHello(string message)
+		=> _message = message;
+}

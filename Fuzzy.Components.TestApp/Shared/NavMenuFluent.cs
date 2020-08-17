@@ -12,7 +12,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Fuzzy.Components.TestApp.Shared
 {
-	public partial class NavMenuFluent: ComponentBase
+	public class NavMenuFluent: ComponentBase
 	{
 		[Inject]
 		ILogger<NavMenuFluent>? Logger { get; set; }
@@ -44,7 +44,9 @@ namespace Fuzzy.Components.TestApp.Shared
 							("counter", "plus", "Counter"),
 							("fluent-counter", "plus", "Fluent Counter"),
 							("fetchdata", "list-rich", "Fetch data"),
-							("fluent-fetchdata", "list-rich", "Fluent Fetch data"))
+							("fluent-fetchdata", "list-rich", "Fluent Fetch data"),
+							("callback", "loop-circular", "Callback"),
+							("fluent-callback", "loop-circular", "Fluent Callback"))
 				.Close(); // div
 
 		void ToggleNavMenu()
