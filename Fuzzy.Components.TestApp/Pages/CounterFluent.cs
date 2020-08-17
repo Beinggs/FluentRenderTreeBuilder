@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 namespace Fuzzy.Components.TestApp.Shared
 {
 	[Route("/fluent-counter")]
-	public partial class CounterFluent: ComponentBase
+	public class CounterFluent: ComponentBase
 	{
 		[Inject]
 		ILogger<CounterFluent>? Logger { get; set; }

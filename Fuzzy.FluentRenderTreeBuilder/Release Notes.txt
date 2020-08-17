@@ -1,5 +1,10 @@
 Version history:
 
+2.1.0
+- Added new `Callback()` methods.
+- Added new Callback examples.
+- Minor code clean-ups.
+
 2.0.0
 - Added `key` parameter on various methods for automatic generation of `SetKey()` calls.
 - Added `Break()` to generate `<br />`.

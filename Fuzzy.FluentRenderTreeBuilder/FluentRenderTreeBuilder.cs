@@ -351,6 +351,87 @@ namespace Fuzzy.Components
 		}
 
 		/// <summary>
+		/// Calls <see cref="RenderTreeBuilder.AddAttribute(int, string, EventCallback)">AddAttribute</see>
+		/// to add the given <see cref="Action"/> as an attribute.
+		/// </summary>
+		/// <param name="action">The <c>Action</c> to add.</param>
+		/// <param name="name">The attribute name; only required if different from the callback method name.</param>
+		/// <param name="line">The source code line number used to generate the sequence number.</param>
+		public FluentRenderTreeBuilder Callback(Action action, string? name = null,
+				[CallerLineNumber] int line = 0)
+		{
+			_builder.AddAttribute(GetSequence(line), name ?? action.Method.Name,
+					EventCallback.Factory.Create(action.Target, action));
+
+			return this;
+		}
+
+		/// <summary>
+		/// Calls <see cref="RenderTreeBuilder.AddAttribute{TArgument}(int, string, EventCallback{TArgument})">AddAttribute</see>
+		/// to add the given <see cref="Action"/> as an attribute.
+		/// </summary>
+		/// <param name="action">The <c>Action&lt;bool&gt;</c> to add.</param>
+		/// <param name="name">The attribute name; only required if different from the callback method name.</param>
+		/// <param name="line">The source code line number used to generate the sequence number.</param>
+		public FluentRenderTreeBuilder Callback(Action<bool> action, string? name = null,
+				[CallerLineNumber] int line = 0)
+		{
+			_builder.AddAttribute(GetSequence(line), name ?? action.Method.Name,
+					EventCallback.Factory.Create(action.Target, action));
+
+			return this;
+		}
+
+		/// <summary>
+		/// Calls <see cref="RenderTreeBuilder.AddAttribute{TArgument}(int, string, EventCallback{TArgument})">AddAttribute</see>
+		/// to add the given <see cref="Action"/> as an attribute.
+		/// </summary>
+		/// <param name="action">The <c>Action&lt;int&gt;</c> to add.</param>
+		/// <param name="name">The attribute name; only required if different from the callback method name.</param>
+		/// <param name="line">The source code line number used to generate the sequence number.</param>
+		public FluentRenderTreeBuilder Callback(Action<int> action, string? name = null,
+				[CallerLineNumber] int line = 0)
+		{
+			_builder.AddAttribute(GetSequence(line), name ?? action.Method.Name,
+					EventCallback.Factory.Create(action.Target, action));
+
+			return this;
+		}
+
+		/// <summary>
+		/// Calls <see cref="RenderTreeBuilder.AddAttribute{TArgument}(int, string, EventCallback{TArgument})">AddAttribute</see>
+		/// to add the given <see cref="Action"/> as an attribute.
+		/// </summary>
+		/// <param name="action">The <c>Action&lt;string&gt;</c> to add.</param>
+		/// <param name="name">The attribute name; only required if different from the callback method name.</param>
+		/// <param name="line">The source code line number used to generate the sequence number.</param>
+		public FluentRenderTreeBuilder Callback(Action<string> action, string? name = null,
+				[CallerLineNumber] int line = 0)
+		{
+			_builder.AddAttribute(GetSequence(line), name ?? action.Method.Name,
+					EventCallback.Factory.Create(action.Target, action));
+
+			return this;
+		}
+
+		/// <summary>
+		/// Calls <see cref="RenderTreeBuilder.AddAttribute{TArgument}(int, string, EventCallback{TArgument})">AddAttribute</see>
+		/// to add the given <see cref="Action"/> as an attribute.
+		/// </summary>
+		/// <typeparam name="T">The <see cref="Type"/> of the callback method's argument.</typeparam>
+		/// <param name="action">The <c>Action&lt;T&gt;</c> to add.</param>
+		/// <param name="name">The attribute name; only required if different from the callback method name.</param>
+		/// <param name="line">The source code line number used to generate the sequence number.</param>
+		public FluentRenderTreeBuilder Callback<T>(Action<T> action, string? name = null,
+				[CallerLineNumber] int line = 0)
+		{
+			_builder.AddAttribute(GetSequence(line), name ?? action.Method.Name,
+					EventCallback.Factory.Create(action.Target, action));
+
+			return this;
+		}
+
+		/// <summary>
 		/// Calls <see cref="RenderTreeBuilder.OpenComponent(int, Type)">OpenComponent</see> to
 		/// add a component of the given type as a block element.
 		/// </summary>

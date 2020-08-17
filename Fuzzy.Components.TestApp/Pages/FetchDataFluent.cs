@@ -12,10 +12,10 @@ using Fuzzy.Components.TestApp.Data;
 namespace Fuzzy.Components.TestApp.Shared
 {
 	[Route("/fluent-fetchdata")]
-	public partial class FetchDataFluent: ComponentBase
+	public class FetchDataFluent: ComponentBase
 	{
-		[Inject]
-		ILogger<FetchDataFluent>? Logger { get; set; }
+		//[Inject]
+		//ILogger<FetchDataFluent>? Logger { get; set; }
 
 		[Inject]
 		WeatherForecastService ForecastService { get; set; } = default!;
@@ -24,7 +24,7 @@ namespace Fuzzy.Components.TestApp.Shared
 
 		protected override void BuildRenderTree(RenderTreeBuilder builder)
 		{
-			var fluentBuilder = builder.Build(logger: Logger)
+			var fluentBuilder = builder.Build()//logger: Logger)
 				.H1("Weather forecast")
 				.P("This component demonstrates fetching data from a service.");
 

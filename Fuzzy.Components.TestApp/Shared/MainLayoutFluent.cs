@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Fuzzy.Components.TestApp.Shared
 {
-	public partial class MainLayoutFluent: LayoutComponentBase
+	public class MainLayoutFluent: LayoutComponentBase
 	{
 		[Inject]
 		ILogger<MainLayoutFluent>? Logger { get; set; }
