@@ -571,10 +571,15 @@ namespace Fuzzy.Components
 		/// <param name="line">The source code line number used to generate the sequence number.</param>
 		public FluentRenderTreeBuilder Content(FluentRenderFragment fragment, bool prettyPrint = false,
 				[CallerLineNumber] int line = 0)
-			=> Content((RenderTreeBuilder _) => fragment(this), prettyPrint, line);
+		{
+			var indent = CurrentIndent; // capture
+
+			return Content(builder =>
+				fragment(builder.Build(_prettyPrint, indent, _maxPerLine, _logger)), prettyPrint, line);
+		}
 
 		/// <summary>
-		/// Calls <see cref="RenderTreeBuilder.AddContent(int, RenderFragment)">AddContent</see>
+		/// Calls <see cref="RenderTreeBuilder.AddContent{TValue}(int, RenderFragment{TValue}, TValue)">AddContent</see>
 		/// to add the given fragment of content.
 		/// </summary>
 		/// <typeparam name="TValue">The <see cref="Type"/> of the value used by the fragment.</typeparam>
@@ -588,7 +593,7 @@ namespace Fuzzy.Components
 			=> Content(fragment(value), prettyPrint, line);
 
 		/// <summary>
-		/// Calls <see cref="RenderTreeBuilder.AddContent(int, RenderFragment)">AddContent</see>
+		/// Calls <see cref="RenderTreeBuilder.AddContent{TValue}(int, RenderFragment{TValue}, TValue)">AddContent</see>
 		/// to add the given fragment of content.
 		/// </summary>
 		/// <typeparam name="TValue">The <see cref="Type"/> of the value used by the fragment.</typeparam>
@@ -678,20 +683,9 @@ namespace Fuzzy.Components
 		/// Note: This method may only be called where an attribute can be added to an open component.
 		/// </remarks>
 		/// <param name="fragment">The <see cref="RenderFragment"/> to generate the child content to add.</param>
-		/// <param name="prettyPrint"><c>true</c> to insert newline and indent whitespace before
-		/// the markup for this element, as long as <see cref="PrettyPrinting"/> is enabled.</param>
 		/// <param name="line">The source code line number used to generate the sequence number.</param>
-		public FluentRenderTreeBuilder ChildContent(RenderFragment fragment, bool prettyPrint = false,
-				[CallerLineNumber] int line = 0)
-		{
-			var indent = CurrentIndent; // capture
-
-			return Attribute("ChildContent",
-					(RenderFragment) (b => b.Build(_prettyPrint, indent, _maxPerLine, _logger)
-						.Content(fragment, prettyPrint, line)
-						.PrettyPrint(line, offset: -1, suppressPrettyPrint: !prettyPrint)),
-					line);
-		}
+		public FluentRenderTreeBuilder ChildContent(RenderFragment fragment, [CallerLineNumber] int line = 0)
+			=> Attribute("ChildContent", fragment, line);
 
 		/// <summary>
 		/// Adds a <c>ChildContent</c> attribute with a <see cref="RenderFragment"/> value which
@@ -701,19 +695,13 @@ namespace Fuzzy.Components
 		/// Note: This method may only be called where an attribute can be added to an open component.
 		/// </remarks>
 		/// <param name="fragment">The <see cref="FluentRenderFragment"/> to generate the child content to add.</param>
-		/// <param name="prettyPrint"><c>true</c> to insert newline and indent whitespace before
-		/// the markup for this element, as long as <see cref="PrettyPrinting"/> is enabled.</param>
 		/// <param name="line">The source code line number used to generate the sequence number.</param>
-		public FluentRenderTreeBuilder ChildContent(FluentRenderFragment fragment, bool prettyPrint = false,
+		public FluentRenderTreeBuilder ChildContent(FluentRenderFragment fragment,
 				[CallerLineNumber] int line = 0)
 		{
 			var indent = CurrentIndent; // capture
 
-			return Attribute("ChildContent",
-					(RenderFragment) (b => b.Build(_prettyPrint, indent, _maxPerLine, _logger)
-						.Content(fragment, prettyPrint, line)
-						.PrettyPrint(line, offset: -1, suppressPrettyPrint: !prettyPrint)),
-					line);
+			return ChildContent(b => fragment(b.Build(_prettyPrint, indent, _maxPerLine, _logger)), line);
 		}
 
 		/// <summary>
@@ -725,20 +713,11 @@ namespace Fuzzy.Components
 		/// </remarks>
 		/// <typeparam name="TValue">The <see cref="Type"/> of the value used by the fragment.</typeparam>
 		/// <param name="fragment">The <see cref="FluentRenderFragment"/> to generate the child content to add.</param>
-		/// <param name="prettyPrint"><c>true</c> to insert newline and indent whitespace before
-		/// the markup for this element, as long as <see cref="PrettyPrinting"/> is enabled.</param>
+		/// <param name="value">The value used by the fragment.</param>
 		/// <param name="line">The source code line number used to generate the sequence number.</param>
-		public FluentRenderTreeBuilder ChildContent<TValue>(RenderFragment<TValue> fragment,
-				bool prettyPrint = false, [CallerLineNumber] int line = 0)
-		{
-			var indent = CurrentIndent; // capture
-
-			return Attribute("ChildContent",
-					(RenderFragment) (b => b.Build(_prettyPrint, indent, _maxPerLine, _logger)
-						.Content(fragment, prettyPrint, line)
-						.PrettyPrint(line, offset: -1, suppressPrettyPrint: !prettyPrint)),
-					line);
-		}
+		public FluentRenderTreeBuilder ChildContent<TValue>(RenderFragment<TValue> fragment, TValue value,
+				[CallerLineNumber] int line = 0)
+			=> ChildContent(fragment(value), line);
 
 		/// <summary>
 		/// Adds a <c>ChildContent</c> attribute with a <see cref="RenderFragment"/> value which
@@ -749,20 +728,11 @@ namespace Fuzzy.Components
 		/// </remarks>
 		/// <typeparam name="TValue">The <see cref="Type"/> of the value used by the fragment.</typeparam>
 		/// <param name="fragment">The <see cref="RenderFragment"/> to generate the child content to add.</param>
-		/// <param name="prettyPrint"><c>true</c> to insert newline and indent whitespace before
-		/// the markup for this element, as long as <see cref="PrettyPrinting"/> is enabled.</param>
+		/// <param name="value">The value used by the fragment.</param>
 		/// <param name="line">The source code line number used to generate the sequence number.</param>
-		public FluentRenderTreeBuilder ChildContent<TValue>(FluentRenderFragment<TValue> fragment,
-				bool prettyPrint = false, [CallerLineNumber] int line = 0)
-		{
-			var indent = CurrentIndent; // capture
-
-			return Attribute("ChildContent",
-					(RenderFragment) (b => b.Build(_prettyPrint, indent, _maxPerLine, _logger)
-						.Content(fragment, prettyPrint, line)
-						.PrettyPrint(line, offset: -1, suppressPrettyPrint: !prettyPrint)),
-					line);
-		}
+		public FluentRenderTreeBuilder ChildContent<TValue>(FluentRenderFragment<TValue> fragment, TValue value,
+				[CallerLineNumber] int line = 0)
+			=> ChildContent(fragment(value), line);
 
 		/// <summary>
 		/// Adds an <c>onclick</c> attribute which calls the given <paramref name="callback"/>

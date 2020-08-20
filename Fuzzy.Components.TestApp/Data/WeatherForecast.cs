@@ -8,7 +8,7 @@ namespace Fuzzy.Components.TestApp.Data
 
 		public int TemperatureC { get; set; }
 
-		public int TemperatureF => 32 + (int) (TemperatureC / 0.5556);
+		public int TemperatureF => (TemperatureC * 2 + 1) * 9 / 10 + 32; // +1 for rounding to nearest degree F
 
 		public string Summary { get; set; } = "";
 	}
