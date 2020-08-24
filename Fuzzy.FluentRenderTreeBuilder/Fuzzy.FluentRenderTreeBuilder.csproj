@@ -82,9 +82,7 @@ Fuzzy Work Ltd.
 
   <ItemGroup>
 	<PackageReference Include="Microsoft.AspNetCore.Components" Version="3.1.6" />
-	<PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="3.1.6" />
-	<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.1.6" />
-	<PackageReference Include="Microsoft.Extensions.Localization" Version="3.1.6" />
+	  <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.1.6" />
   </ItemGroup>
 
   <ItemGroup>
