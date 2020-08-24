@@ -90,7 +90,7 @@ namespace Fuzzy.Components.TestApp.Shared
 						.Cell("Row2, Cell1;")
 						.Cell("Row2, Cell2;")
 						.Cell("Row2, Cell3;")
-					.NewAutoRow ()
+					.NewAutoRow()
 						.Cell("Row3, Cell1;")
 						.Cell("Row3, Cell2;")
 						.Cell("Row3, Cell3;")
