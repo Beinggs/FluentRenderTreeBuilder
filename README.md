@@ -1,10 +1,10 @@
-#  FluentRenderTreeBuilder
+# FluentRenderTreeBuilder
 
 The [`FluentRenderTreeBuilder`](https://github.com/Fuzzy-Work/FluentRenderTreeBuilder) library extends Blazor's built-in [`RenderTreeBuilder`](https://docs.microsoft.com/dotnet/api/microsoft.aspnetcore.components.rendering.rendertreebuilder) with a clean and fluent API for building Blazor components in pure C# code, and automatically generates source-code-line-based sequence numbers, whilst still allowing specific sequence numbers to be specified if desired.
 
 The resulting markup code is identical to the razor compiler output, with minor whitespace differences, and optionally output can be automatically minified by disabling the built-in 'pretty printing' feature, which is enabled by default to match the behaviour of Blazor's razor page compiler.
 
-##  Fluent API
+## Fluent API
 
 Developers don't have to hand-write repetitive calls to the built-in `RenderTreeBuilder` as the `FluentRenderTreeBuilder` allows fluent chaining of calls.
  
@@ -67,7 +67,7 @@ There are many new convenience methods and parameters provided, such as automati
 
 See the pages and components in the test app provided in the source code [repo on GitHub](https://github.com/Fuzzy-Work/FluentRenderTreeBuilder) for more usage examples.
 
-##  Extensibility
+## Extensibility
 
 Extension methods can be used to add new high-level functionality, and many are already included to help with `table`, `list` and `attribute` generation. In the above code snippet the `OpenElement` method which takes optional CSS `class` and `id` attributes extends the built-in `OpenElement` method.
 
@@ -115,7 +115,7 @@ protected override void BuildRenderTree(
  
 The `Menu()` extensibility example above also includes an `icon` parameter for each menu item which sets the nav item's icon from Blazor's built-in [Open Iconic](https://useiconic.com/open) icon set.
 
-##  Source code line-based sequence numbers
+## Source code line-based sequence numbers
 
 When using `FluentRenderTreeBuilder` developers don't have to manually provide and maintain the sequence numbers for each call to `RenderTreeBuilder`.
  
