@@ -23,7 +23,7 @@ namespace Fuzzy.Components
 		/// <param name="id">The optional id attribute value.</param>
 		/// <param name="line">The source code line number used to generate the sequence number.</param>
 		public static FluentRenderTreeBuilder OpenTable(this FluentRenderTreeBuilder frtb,
-				string? @class = null, string? id = null, [CallerLineNumber] int line = 0)
+				string? @class = "table", string? id = null, [CallerLineNumber] int line = 0)
 			=> frtb.OpenElement("table", @class, id, line: line);
 
 		/// <summary>
@@ -33,7 +33,8 @@ namespace Fuzzy.Components
 		/// </summary>
 		/// <remarks>
 		/// Note: Each call to this method must be matched with a call to
-		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close</see>.
+		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close</see>, which will close
+		/// both the last row and the table.
 		/// </remarks>
 		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
 		/// <param name="tableClass">The optional CSS class name for the table.</param>
@@ -41,7 +42,7 @@ namespace Fuzzy.Components
 		/// <param name="rowClass">The optional CSS class name for the first table row.</param>
 		/// <param name="line">The source code line number used to generate the sequence number.</param>
 		public static FluentRenderTreeBuilder OpenAutoTable(this FluentRenderTreeBuilder frtb,
-				string? tableClass = null, string? tableId = null,
+				string? tableClass = "table", string? tableId = null,
 				string? rowClass = null, [CallerLineNumber] int line = 0)
 			=> frtb
 				.OpenElement("table", tableClass, tableId, line: line)
@@ -96,6 +97,11 @@ namespace Fuzzy.Components
 		/// Opens a new <c>&lt;tr&gt;</c> block, adding the given CSS class attribute if provided,
 		/// after first closing the currently open row.
 		/// </summary>
+		/// <remarks>
+		/// Note: Do not use this method with an
+		/// <see cref="OpenAutoTable(FluentRenderTreeBuilder, string?, string?, string?, int)">Auto Table</see>;
+		/// instead, use <see cref="NewAutoRow(FluentRenderTreeBuilder, string?, int)">NewAutoRow</see>.
+		/// </remarks>
 		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
 		/// <param name="class">The optional CSS class name for the new table row.</param>
 		/// <param name="line">The source code line number used to generate the sequence number.</param>
@@ -104,6 +110,30 @@ namespace Fuzzy.Components
 			=> frtb
 				.Close(line: line) // tr
 				.OpenRow(@class, line);
+
+		/// <summary>
+		/// Opens a new <c>&lt;tr&gt;</c> block, adding the given CSS class attribute if provided,
+		/// after first closing the currently open row.
+		/// </summary>
+		/// <remarks>
+		/// Note: Do not use this method with a
+		/// <see cref="OpenTable(FluentRenderTreeBuilder, string?, string?, int)">Table</see>;
+		/// instead, use <see cref="NewRow(FluentRenderTreeBuilder, string?, int)">NewRow</see>.
+		/// </remarks>
+		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
+		/// <param name="class">The optional CSS class name for the new table row.</param>
+		/// <param name="line">The source code line number used to generate the sequence number.</param>
+		public static FluentRenderTreeBuilder NewAutoRow (this FluentRenderTreeBuilder frtb,
+				string? @class = null, [CallerLineNumber] int line = 0)
+		{
+			// we can't call Close() here because Auto Table closes itself too, so go direct to underlying builder
+			frtb.Builder.CloseElement(); // tr
+
+			// as we didn't call Close() above, we now can't call Element(), so go direct again
+			frtb.Builder.OpenElement(frtb.GetSequence(line), "tr");
+
+			return frtb.Class(@class, line);
+		}
 
 		/// <summary>
 		/// Opens a <c>&lt;table&gt;</c> block with a <c>&lt;thead&gt;</c> section.
@@ -120,7 +150,7 @@ namespace Fuzzy.Components
 		/// <param name="rowClass">The optional CSS class name for the table head row.</param>
 		/// <param name="line">The source code line number used to generate the sequence number.</param>
 		public static FluentRenderTreeBuilder TableHead(this FluentRenderTreeBuilder frtb,
-				string? tableClass = null, string? tableId = null, string? rowClass = null,
+				string? tableClass = "table", string? tableId = null, string? rowClass = null,
 				[CallerLineNumber] int line = 0)
 			=> frtb
 				.OpenElement("table", tableClass, tableId, line: line)
