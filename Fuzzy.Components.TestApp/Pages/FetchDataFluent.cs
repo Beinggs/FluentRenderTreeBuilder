@@ -24,35 +24,39 @@ namespace Fuzzy.Components.TestApp.Shared
 
 		protected override void BuildRenderTree(RenderTreeBuilder builder)
 		{
-			var fluentBuilder = builder.Build()//logger: Logger)
-				.H1("Weather forecast")
-				.P("This component demonstrates fetching data from a service.");
+			var fluentBuilder = builder.Build();//logger: Logger);
 
-			if (_forecasts == null)
-			{
-				fluentBuilder.P("<em>Loading...</em>");
-				return;
-			}
-
+			// conditional steps example
 			fluentBuilder
-				.TableHead("table")
-					.HeadCell("Date")
-					.HeadCell("Temp. (C)")
-					.HeadCell("Temp. (F)")
-					.HeadCell("Summary")
-				.OpenTableBody();
+				.H1 ("Weather forecast")
+				.P("This component demonstrates fetching data from a service.")
+				.If(_forecasts == null,
+					fluentBuilder2 => // if true
+						fluentBuilder2.P("<em>Loading...</em>"),
+					fluentBuilder2 => // else
+					{
+						fluentBuilder2
+							.TableHead()
+							.HeadCell("Date")
+							.HeadCell("Temp. (C)")
+							.HeadCell("Temp. (F)")
+							.HeadCell("Summary")
+							.OpenTableBody();
 
-				foreach (var forecast in _forecasts)
-					fluentBuilder
-						.OpenRow()
-							.Cell(forecast.Date.ToShortDateString())
-							.Cell(forecast.TemperatureC)
-							.Cell(forecast.TemperatureF)
-							.Cell(forecast.Summary)
-						.Close(); // row
+							foreach (var forecast in _forecasts!) // we're only here if _forecasts != null
+								fluentBuilder2
+									.OpenRow()
+										.Cell(forecast.Date.ToShortDateString())
+										.Cell(forecast.TemperatureC)
+										.Cell(forecast.TemperatureF)
+										.Cell(forecast.Summary)
+									.Close(); // row
 
-			fluentBuilder.Close(); // table body (which closes table too, via OpenTableBody's CloseHelper)
+							fluentBuilder2.Close(); // table body (which closes table too, via OpenTableBody's CloseHelper)
+					})
+				.H5("End of conditional steps example.");
 
+			// basic table example
 			fluentBuilder
 				.OpenDiv()
 					.Break()
@@ -70,8 +74,10 @@ namespace Fuzzy.Components.TestApp.Shared
 							.Cell("Row3, Cell1;")
 							.Cell("Row3, Cell2;")
 							.Cell("Row3, Cell3;")
-				.Close(3); // row, table, div
+				.Close(3) // row, table, div
+				.H5("End of basic table example.");
 
+			// auto-row table example
 			fluentBuilder
 				.OpenDiv()
 					.Break()
@@ -80,16 +86,18 @@ namespace Fuzzy.Components.TestApp.Shared
 						.Cell("Row1, Cell1;")
 						.Cell("Row1, Cell2;")
 						.Cell("Row1, Cell3;")
-					.NewRow()
+					.NewAutoRow()
 						.Cell("Row2, Cell1;")
 						.Cell("Row2, Cell2;")
 						.Cell("Row2, Cell3;")
-					.NewRow()
+					.NewAutoRow()
 						.Cell("Row3, Cell1;")
 						.Cell("Row3, Cell2;")
 						.Cell("Row3, Cell3;")
-				.Close(2); // auto-table, div
+				.Close(2) // auto-table, div
+				.H5("End of auto-row table example.");
 
+			// looping table example
 			fluentBuilder
 				.OpenDiv()
 					.Break()
@@ -115,7 +123,8 @@ namespace Fuzzy.Components.TestApp.Shared
 						fluentBuilder.Close(); // row
 					}
 
-			fluentBuilder.CloseAll(); // table, div
+					fluentBuilder.Close(2) // table, div
+				.H5("End of looping table example.");
 		}
 
 		protected override async Task OnInitializedAsync()

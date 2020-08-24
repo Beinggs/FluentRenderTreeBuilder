@@ -166,14 +166,15 @@ namespace Fuzzy.Components
 		public const int MAX_FRAMES_PER_LINE = 10;
 
 		readonly Stack<FrameInfo> _frames = new Stack<FrameInfo>();
+
+#pragma warning disable IDE0032 // Use auto property
 		readonly RenderTreeBuilder _builder = default!;
+		readonly bool _prettyPrint;
+#pragma warning restore IDE0032 // Use auto property
+
 		readonly int _initialIndent;
 		readonly int _maxPerLine;
 		readonly ILogger? _logger;
-
-#pragma warning disable IDE0032 // Use auto property
-		readonly bool _prettyPrint;
-#pragma warning restore IDE0032 // Use auto property
 
 		int _currentLine;
 		int _sequence;
@@ -187,6 +188,12 @@ namespace Fuzzy.Components
 		/// Gets the current indent level for <see cref="PrettyPrinting"/>, if enabled.
 		/// </summary>
 		public int CurrentIndent => _frames.Count - _closeHelpers; // don't count close helpers in indentation
+
+		/// <summary>
+		/// Gets the underlying <see cref="RenderTreeBuilder"/> this <c>FluentRenderTreeBuilder</c> is
+		/// extending.
+		/// </summary>
+		public RenderTreeBuilder Builder => _builder;
 
 		/// <summary>
 		/// Indicates whether pretty-printing is enabled, as set by the <c>prettyPrint</c>
@@ -982,31 +989,34 @@ namespace Fuzzy.Components
 			return this;
 		}
 
-		FluentRenderTreeBuilder DoClose(bool prettyPrint, int line)
+		/// <summary>
+		/// Conditionally executes build steps.
+		/// </summary>
+		/// <param name="test">If <c>true</c>, executes the <paramref name="ifAction"/>.</param>
+		/// <param name="ifAction">Executed if <paramref name="ifAction"/> is <c>true</c>.</param>
+		/// <param name="elseAction">Optionally executed if <paramref name="ifAction"/> is <c>false</c>.</param>
+		public FluentRenderTreeBuilder If (bool test,
+				Action<FluentRenderTreeBuilder> ifAction,
+				Action<FluentRenderTreeBuilder>? elseAction = null)
 		{
-			// pop this first so PrettyPrint below produces the correct indent
-			var (frameType, name, closeHelper) = _frames.Pop();
-
-			_logger?.LogInformation($"DoClose: Closing {frameType} {name}");
-
-			if (prettyPrint && frameType != FrameType.Region && frameType != FrameType.CloseHelper)
-				PrettyPrint(line);
-
-			switch (frameType)
-			{
-				case FrameType.Component: _builder.CloseComponent(); break;
-				case FrameType.Element: _builder.CloseElement(); break;
-				case FrameType.Region: _builder.CloseRegion(); break;
-
-				case FrameType.CloseHelper:
-					--_closeHelpers;
-
-					closeHelper.Invoke(line);
-					break;
-			};
+			if (test)
+				ifAction (this);
+			else
+				elseAction?.Invoke (this);
 
 			return this;
 		}
+
+		/// <summary>
+		/// Conditionally executes build steps.
+		/// </summary>
+		/// <param name="predicate">If returns <c>true</c>, executes the <paramref name="ifAction"/>.</param>
+		/// <param name="ifAction">Executed if <paramref name="ifAction"/> is <c>true</c>.</param>
+		/// <param name="elseAction">Optionally executed if <paramref name="ifAction"/> is <c>false</c>.</param>
+		public FluentRenderTreeBuilder If (Func<bool> predicate,
+				Action<FluentRenderTreeBuilder> ifAction,
+				Action<FluentRenderTreeBuilder>? elseAction = null)
+			=> If (predicate(), ifAction, elseAction);
 
 		#region Utility Methods
 
@@ -1072,7 +1082,7 @@ namespace Fuzzy.Components
 		/// </remarks>
 		/// <param name="line">The source code line from which to generate the sequence number.</param>
 		/// <param name="callerName">The name of the calling member.</param>
-		int GetSequence(int line, [CallerMemberName] string callerName = "")
+		public int GetSequence(int line, [CallerMemberName] string callerName = "")
 		{
 			if (line == _currentLine)
 			{
@@ -1116,6 +1126,39 @@ namespace Fuzzy.Components
 			}
 
 			return _sequence;
+		}
+
+		/// <summary>
+		/// Closes the current block, calling a close helper if present.
+		/// </summary>
+		/// <param name="prettyPrint"><c>true</c> to insert indent whitespace following the
+		/// the markup for this element, as long as <see cref="PrettyPrinting"/> is enabled.</param>
+		/// <param name="line">The source code line from which to generate the sequence number.</param>
+		/// <returns></returns>
+		FluentRenderTreeBuilder DoClose (bool prettyPrint, int line)
+		{
+			// pop this first so PrettyPrint below produces the correct indent
+			var (frameType, name, closeHelper) = _frames.Pop();
+
+			_logger?.LogInformation($"DoClose: Closing {frameType} {name}");
+
+			if (prettyPrint && frameType != FrameType.Region && frameType != FrameType.CloseHelper)
+				PrettyPrint(line);
+
+			switch (frameType)
+			{
+				case FrameType.Component: _builder.CloseComponent(); break;
+				case FrameType.Element: _builder.CloseElement(); break;
+				case FrameType.Region: _builder.CloseRegion(); break;
+
+				case FrameType.CloseHelper:
+					--_closeHelpers;
+
+					closeHelper.Invoke(line);
+					break;
+			};
+
+			return this;
 		}
 
 		#endregion Utility Methods

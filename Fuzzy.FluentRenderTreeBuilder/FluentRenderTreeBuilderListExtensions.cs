@@ -34,7 +34,8 @@ namespace Fuzzy.Components
 		/// </summary>
 		/// <remarks>
 		/// Note: Each call to this method must be matched with a call to
-		/// <see cref="FluentRenderTreeBuilder.Close(int, bool, int)">Close</see>.
+		/// <see cref="FluentRenderTreeBuilder.Close(int, bool, int)">Close</see>, which will
+		/// close both the last item and the list.
 		/// </remarks>
 		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
 		/// <param name="listClass">The optional CSS class name for the list.</param>
@@ -74,7 +75,8 @@ namespace Fuzzy.Components
 		/// </summary>
 		/// <remarks>
 		/// Note: Each call to this method must be matched with a call to
-		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close</see>.
+		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close</see>, which will
+		/// close both the last item and the list.
 		/// </remarks>
 		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
 		/// <param name="listClass">The optional CSS class name for the list.</param>
@@ -121,9 +123,19 @@ namespace Fuzzy.Components
 			=> frtb.Element("li", markup, @class, key: key, line: line);
 
 		/// <summary>
-		/// Opens a new <c>&lt;li&gt;</c> block, adding the given CSS class attribute, and setting
+		/// Opens a new <c>&lt;li&gt;</c> block within a
+		/// <see cref="OpenList(FluentRenderTreeBuilder, string?, string?, int)">List</see> or an
+		/// <see cref="OpenOrderedList(FluentRenderTreeBuilder, string?, string?, int)">Ordered List</see>,
+		/// adding the given CSS class attribute, and setting
 		/// the key, if provided, after first closing the currently open item.
 		/// </summary>
+		/// <remarks>
+		/// Note: Do not use this method within an
+		/// <see cref="OpenAutoList(FluentRenderTreeBuilder, string?, string?, string?, object?, int)">Auto List</see>
+		/// or an
+		/// <see cref="OpenAutoOrderedList(FluentRenderTreeBuilder, string?, string?, string?, object?, int)">Auto Ordered List</see>;
+		/// instead, use <see cref="NewAutoItem(FluentRenderTreeBuilder, string?, object?, int)">NewAutoItem</see>.
+		/// </remarks>
 		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
 		/// <param name="class">The optional CSS class name for the new list item.</param>
 		/// <param name="key">The optional key to set for this list item.</param>
@@ -133,5 +145,37 @@ namespace Fuzzy.Components
 			=> frtb
 				.Close(line: line) // li
 				.OpenItem(@class, key, line);
+
+		/// <summary>
+		/// Opens a new <c>&lt;li&gt;</c> block within an
+		/// <see cref="OpenAutoList(FluentRenderTreeBuilder, string?, string?, string?, object?, int)">Auto List</see>
+		/// or an
+		/// <see cref="OpenAutoOrderedList(FluentRenderTreeBuilder, string?, string?, string?, object?, int)">Auto Ordered List</see>,
+		/// adding the given CSS class attribute, and setting
+		/// the key, if provided, after first closing the currently open item.
+		/// </summary>
+		/// <remarks>
+		/// Note: Do not use this method within a
+		/// <see cref="OpenList(FluentRenderTreeBuilder, string?, string?, int)">List</see> or an
+		/// <see cref="OpenOrderedList(FluentRenderTreeBuilder, string?, string?, int)">Ordered List</see>;
+		/// instead, use <see cref="NewItem(FluentRenderTreeBuilder, string?, object?, int)">NewItem</see>.
+		/// </remarks>
+		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
+		/// <param name="class">The optional CSS class name for the new list item.</param>
+		/// <param name="key">The optional key to set for this list item.</param>
+		/// <param name="line">The source code line number used to generate the sequence number.</param>
+		public static FluentRenderTreeBuilder NewAutoItem (this FluentRenderTreeBuilder frtb,
+				string? @class = null, object? key = null, [CallerLineNumber] int line = 0)
+		{
+			// we can't call Close() here because Auto List closes itself too!
+			frtb.Builder.CloseElement(); // li
+
+			// as we didn't call Close() above, we now can't call Element(), so go direct again
+			frtb.Builder.OpenElement (frtb.GetSequence (line), "li");
+
+			return frtb
+				.SetKey(key)
+				.Class (@class, line);
+		}
 	}
 }

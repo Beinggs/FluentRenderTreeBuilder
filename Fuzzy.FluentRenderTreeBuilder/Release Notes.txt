@@ -1,9 +1,15 @@
 Version history:
 
+2.2.0:
+- Exposed `GetSequence()` and `Builder` to give extensions more control.
+- Added `NewAutoItem()` in list extensions.
+- Added `NewAutoRow()` in table extensions.
+- Fixed logic for callbacks with render fragments.
+- Made weather forecast more 'accurate' (couldn't resist!).
+
 2.1.0
 - Added new `Callback()` methods.
 - Added new Callback examples.
-- Minor code clean-ups.
 
 2.0.0
 - Added `key` parameter on various methods for automatic generation of `SetKey()` calls.
@@ -31,5 +37,7 @@ Version history:
 - Initial release.
 
 
-Thanks for checking it out!
+Please raise an issue if there are any problems!
+
+Cheers,
 Fuzzy Work Ltd.
