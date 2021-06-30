@@ -1,23 +1,40 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
-	<TargetFramework>netstandard2.1</TargetFramework>
-	<RazorLangVersion>3.0</RazorLangVersion>
-	<Nullable>enable</Nullable>
-	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-	<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-	<Description>A fluent RenderTreeBuilder for Blazor Server and WebAssembly</Description>
-	<Authors>Fuzzy Team</Authors>
-	<Company>Fuzzy Work Ltd.</Company>
-	<Copyright>Fuzzy Work Ltd.</Copyright>
-	<PackageId>Fuzzy.Blazor.FluentRenderTreeBuilder</PackageId>
-	<PackageLicenseExpression>MIT</PackageLicenseExpression>
-	<PackageProjectUrl>https://github.com/Fuzzy-Work/FluentRenderTreeBuilder</PackageProjectUrl>
-	<PackageIcon>Fuzzy.Blazor.png</PackageIcon>
-	<RepositoryUrl>https://github.com/Fuzzy-Work/FluentRenderTreeBuilder</RepositoryUrl>
-	<RepositoryType>git</RepositoryType>
-	<PackageTags>Blazor, components, component, library, fluent, RenderTreeBuilder</PackageTags>
-	<PackageReleaseNotes>Version history:
+    <TargetFramework>net5.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Description>A fluent RenderTreeBuilder for Blazor Server and WebAssembly</Description>
+    <Authors>Fuzzy Team</Authors>
+    <Company>Fuzzy Work Ltd.</Company>
+    <Copyright>Fuzzy Work Ltd.</Copyright>
+    <PackageId>Fuzzy.Blazor.FluentRenderTreeBuilder</PackageId>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/Fuzzy-Work/FluentRenderTreeBuilder</PackageProjectUrl>
+    <PackageIcon>Fuzzy.Blazor.png</PackageIcon>
+    <RepositoryUrl>https://github.com/Fuzzy-Work/FluentRenderTreeBuilder</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>Blazor, components, component, library, fluent, RenderTreeBuilder</PackageTags>
+    <PackageReleaseNotes>
+
+Documentation
+
+Please find the docs here:
+https://fuzzy-work.github.io/FluentRenderTreeBuilder/
+
+
+Version History
+
+3.0.1:
+- Note to self: release notes are text, not Markdown!
+
+3.0.0:
+- Updated to .NET 5.
+- Added more detail to Callback examples to better show what's going on.
+- Addressed several nullability warnings.
+- Updated doc comments.
+- Code clean-up.
 
 2.2.0:
 - Exposed `GetSequence()` and `Builder` to give extensions more control.
@@ -61,35 +78,34 @@ Please raise an issue if there are any problems!
 Cheers,
 Fuzzy Work Ltd.
 </PackageReleaseNotes>
-	<Version>2.2.0</Version>
+    <Version>3.0.1</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-	<DocumentationFile>obj/Debug/Fuzzy.FluentRenderTreeBuilder.xml</DocumentationFile>
+    <DocumentationFile>obj/Debug/Fuzzy.FluentRenderTreeBuilder.xml</DocumentationFile>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-		<DocumentationFile>obj/Release.Fuzzy.FluentRenderTreeBuilder.xml</DocumentationFile>
-	</PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>obj/Release.Fuzzy.FluentRenderTreeBuilder.xml</DocumentationFile>
+  </PropertyGroup>
 
   <ItemGroup>
-	<Compile Remove="Shared\MainLayoutOld.razor.cs" />
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="5.0.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.7" />
   </ItemGroup>
 
   <ItemGroup>
-	<Content Remove="Shared\MainLayoutOld.razor" />
+    <None Include="Fuzzy.Blazor.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
-	<PackageReference Include="Microsoft.AspNetCore.Components" Version="3.1.6" />
-	  <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.1.6" />
-  </ItemGroup>
-
-  <ItemGroup>
-	<None Include="Fuzzy.Blazor.png">
-	  <Pack>True</Pack>
-	  <PackagePath></PackagePath>
-	</None>
+    <Folder Include="Properties\" />
   </ItemGroup>
 
 </Project>

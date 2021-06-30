@@ -14,13 +14,13 @@ namespace Fuzzy.Components.TestApp.Shared
 
 		const string _aboutLink = "<a href=\"https://docs.microsoft.com/aspnet/\" target=\"_blank\">About</a>";
 
-		protected override void BuildRenderTree(RenderTreeBuilder builder)
-			=> builder.Build(logger: Logger)
-				.ComponentDiv<NavMenuFluent>("sidebar")
+		protected override void BuildRenderTree (RenderTreeBuilder builder)
+			=> builder.Build (logger: Logger)
+				.ComponentDiv<NavMenuFluent> ("sidebar")
 				.NewLine()
-				.OpenDiv("main", "body")
-					.Div(_aboutLink, "top-row px-4")
-					.ContentDiv(Body, "content px-4")
+				.OpenDiv ("main", "body")
+					.Div (_aboutLink, "top-row px-4")
+					.ContentDiv (Body!, "content px-4") // ! because this should never be called with a null Body
 				.Close();
 	}
 }

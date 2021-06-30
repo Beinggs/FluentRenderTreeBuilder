@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Fuzzy.Components.TestApp.Shared
 {
-	[Route("/fluent-counter")]
+	[Route ("/fluent-counter")]
 	public class CounterFluent: ComponentBase
 	{
 		[Inject]
@@ -16,15 +16,15 @@ namespace Fuzzy.Components.TestApp.Shared
 
 		int _currentCount = 0;
 
-		protected override void BuildRenderTree(RenderTreeBuilder builder)
-			=> builder.Build(logger: Logger)
-				.H1("Fluent Counter")
+		protected override void BuildRenderTree (RenderTreeBuilder builder)
+			=> builder.Build (logger: Logger)
+				.H1 ("Fluent Counter")
 				.NewLine()
-				.OpenP().Content("Current count: ").Content(_currentCount).CloseInline()
+				.OpenP().Content ("Current count: ").Content (_currentCount).CloseInline()
 				.NewLine()
-				.OpenElement("button", "btn btn-primary")
-					.Attribute("onclick", EventCallback.Factory.Create<MouseEventArgs>(this, IncrementCount))
-					.Content("Click me").CloseInline();
+				.OpenElement ("button", "btn btn-primary")
+					.Attribute ("onclick", EventCallback.Factory.Create<MouseEventArgs> (this, IncrementCount))
+					.Content ("Click me").CloseInline();
 
 		void IncrementCount()
 			=> _currentCount++;

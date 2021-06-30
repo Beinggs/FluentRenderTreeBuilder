@@ -16,7 +16,7 @@ namespace Fuzzy.Components
 		/// </summary>
 		/// <remarks>
 		/// Note: Each call to this method must be matched with a call to
-		/// <see cref="FluentRenderTreeBuilder.Close(int, bool, int)">Close</see>.
+		/// <see cref="FluentRenderTreeBuilder.Close(int, bool, int)">Close(...)</see>.
 		/// </remarks>
 		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
 		/// <param name="class">The optional CSS class name for the table.</param>
@@ -29,11 +29,11 @@ namespace Fuzzy.Components
 		/// <summary>
 		/// Opens a <c>&lt;table&gt;</c> block, adding the given id and CSS class attributes if
 		/// provided, and automatically opens the first row with a call to
-		/// <see cref="OpenRow(FluentRenderTreeBuilder, string?, int)">OpenRow</see>.
+		/// <see cref="OpenRow(FluentRenderTreeBuilder, string?, int)">OpenRow(...)</see>.
 		/// </summary>
 		/// <remarks>
 		/// Note: Each call to this method must be matched with a call to
-		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close</see>, which will close
+		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close(...)</see>, which will close
 		/// both the last row and the table.
 		/// </remarks>
 		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
@@ -54,7 +54,7 @@ namespace Fuzzy.Components
 		/// </summary>
 		/// <remarks>
 		/// Note: Each call to this method must be matched with a call to
-		/// <see cref="FluentRenderTreeBuilder.Close(int, bool, int)">Close</see>.
+		/// <see cref="FluentRenderTreeBuilder.Close(int, bool, int)">Close(...)</see>.
 		/// </remarks>
 		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
 		/// <param name="class">The optional CSS class name for the table row.</param>
@@ -69,7 +69,7 @@ namespace Fuzzy.Components
 		/// </summary>
 		/// <remarks>
 		/// Note: Each call to this method must be matched with a call to
-		/// <see cref="FluentRenderTreeBuilder.Close(int, bool, int)">Close</see>.
+		/// <see cref="FluentRenderTreeBuilder.Close(int, bool, int)">Close(...)</see>.
 		/// </remarks>
 		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
 		/// <param name="class">The optional CSS class name.</param>
@@ -99,8 +99,8 @@ namespace Fuzzy.Components
 		/// </summary>
 		/// <remarks>
 		/// Note: Do not use this method with an
-		/// <see cref="OpenAutoTable(FluentRenderTreeBuilder, string?, string?, string?, int)">Auto Table</see>;
-		/// instead, use <see cref="NewAutoRow(FluentRenderTreeBuilder, string?, int)">NewAutoRow</see>.
+		/// <see cref="OpenAutoTable(FluentRenderTreeBuilder, string?, string?, string?, int)">OpenAutoTable(...)</see>;
+		/// instead, use <see cref="NewAutoRow(FluentRenderTreeBuilder, string?, int)">NewAutoRow(...)</see>.
 		/// </remarks>
 		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
 		/// <param name="class">The optional CSS class name for the new table row.</param>
@@ -117,8 +117,8 @@ namespace Fuzzy.Components
 		/// </summary>
 		/// <remarks>
 		/// Note: Do not use this method with a
-		/// <see cref="OpenTable(FluentRenderTreeBuilder, string?, string?, int)">Table</see>;
-		/// instead, use <see cref="NewRow(FluentRenderTreeBuilder, string?, int)">NewRow</see>.
+		/// <see cref="OpenTable(FluentRenderTreeBuilder, string?, string?, int)">OpenTable(...)</see>;
+		/// instead, use <see cref="NewRow(FluentRenderTreeBuilder, string?, int)">NewRow(...)</see>.
 		/// </remarks>
 		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
 		/// <param name="class">The optional CSS class name for the new table row.</param>
@@ -140,8 +140,8 @@ namespace Fuzzy.Components
 		/// </summary>
 		/// <remarks>
 		/// Note: this method must be used with a subsequent
-		/// <see cref="OpenTableBody">OpenTableBody</see> call and a matching
-		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close</see> call for the table
+		/// <see cref="OpenTableBody">OpenTableBody(...)</see> call and a matching
+		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close(...)</see> call for the table
 		/// body.
 		/// </remarks>
 		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
@@ -174,7 +174,7 @@ namespace Fuzzy.Components
 		/// <summary>
 		/// Opens a <c>&lt;tbody&gt;</c> block after first closing the existing
 		/// <c>&lt;thead&gt;</c> block opened by a previous call to
-		/// <see cref="TableHead(FluentRenderTreeBuilder, string?, string?, string?, int)">TableHead</see>.
+		/// <see cref="TableHead(FluentRenderTreeBuilder, string?, string?, string?, int)">TableHead(...)</see>.
 		/// </summary>
 		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
 		/// <param name="line">The source code line number used to generate the sequence number.</param>

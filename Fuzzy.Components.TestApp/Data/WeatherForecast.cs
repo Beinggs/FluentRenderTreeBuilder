@@ -1,5 +1,6 @@
 using System;
 
+
 namespace Fuzzy.Components.TestApp.Data
 {
 	public class WeatherForecast
