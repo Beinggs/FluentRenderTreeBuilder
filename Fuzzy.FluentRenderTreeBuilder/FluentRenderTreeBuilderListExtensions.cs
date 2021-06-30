@@ -16,7 +16,7 @@ namespace Fuzzy.Components
 		/// </summary>
 		/// <remarks>
 		/// Note: Each call to this method must be matched with a call to
-		/// <see cref="FluentRenderTreeBuilder.Close(int, bool, int)">Close</see>.
+		/// <see cref="FluentRenderTreeBuilder.Close(int, bool, int)">Close(...)</see>.
 		/// </remarks>
 		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
 		/// <param name="class">The optional CSS class name for the list.</param>
@@ -29,12 +29,12 @@ namespace Fuzzy.Components
 		/// <summary>
 		/// Opens a <c>&lt;ul&gt;</c> block, adding the given id and CSS class attributes if
 		/// provided, and automatically opens the first list item with a call to
-		/// <see cref="OpenItem(FluentRenderTreeBuilder, string?, object?, int)">OpenItem</see>
+		/// <see cref="OpenItem(FluentRenderTreeBuilder, string?, object?, int)">OpenItem(...)</see>
 		/// and sets the item's key, if provided.
 		/// </summary>
 		/// <remarks>
 		/// Note: Each call to this method must be matched with a call to
-		/// <see cref="FluentRenderTreeBuilder.Close(int, bool, int)">Close</see>, which will
+		/// <see cref="FluentRenderTreeBuilder.Close(int, bool, int)">Close(...)</see>, which will
 		/// close both the last item and the list.
 		/// </remarks>
 		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
@@ -57,7 +57,7 @@ namespace Fuzzy.Components
 		/// </summary>
 		/// <remarks>
 		/// Note: Each call to this method must be matched with a call to
-		/// <see cref="FluentRenderTreeBuilder.Close(int, bool, int)">Close</see>.
+		/// <see cref="FluentRenderTreeBuilder.Close(int, bool, int)">Close(...)</see>.
 		/// </remarks>
 		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
 		/// <param name="class">The optional CSS class name for the list.</param>
@@ -71,11 +71,11 @@ namespace Fuzzy.Components
 		/// Opens an <c>&lt;ol&gt;</c> block, adding the given id and CSS class attributes if
 		/// provided, and automatically opens the first list item and sets the item's key, if
 		/// provided, with a call to
-		/// <see cref="OpenItem(FluentRenderTreeBuilder, string?, object?, int)">OpenItem</see>.
+		/// <see cref="OpenItem(FluentRenderTreeBuilder, string?, object?, int)">OpenItem(...)</see>.
 		/// </summary>
 		/// <remarks>
 		/// Note: Each call to this method must be matched with a call to
-		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close</see>, which will
+		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close(...)</see>, which will
 		/// close both the last item and the list.
 		/// </remarks>
 		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
@@ -98,7 +98,7 @@ namespace Fuzzy.Components
 		/// </summary>
 		/// <remarks>
 		/// Note: Each call to this method must be matched with a call to
-		/// <see cref="FluentRenderTreeBuilder.Close(int, bool, int)">Close</see>.
+		/// <see cref="FluentRenderTreeBuilder.Close(int, bool, int)">Close(...)</see>.
 		/// </remarks>
 		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
 		/// <param name="class">The optional CSS class name.</param>
@@ -124,17 +124,19 @@ namespace Fuzzy.Components
 
 		/// <summary>
 		/// Opens a new <c>&lt;li&gt;</c> block within a
-		/// <see cref="OpenList(FluentRenderTreeBuilder, string?, string?, int)">List</see> or an
-		/// <see cref="OpenOrderedList(FluentRenderTreeBuilder, string?, string?, int)">Ordered List</see>,
+		/// <see cref="OpenList(FluentRenderTreeBuilder, string?, string?, int)">OpenList(...)</see> or an
+		/// <see cref="OpenOrderedList(FluentRenderTreeBuilder, string?, string?, int)">OpenOrderedList(...)</see>,
 		/// adding the given CSS class attribute, and setting
 		/// the key, if provided, after first closing the currently open item.
 		/// </summary>
 		/// <remarks>
 		/// Note: Do not use this method within an
-		/// <see cref="OpenAutoList(FluentRenderTreeBuilder, string?, string?, string?, object?, int)">Auto List</see>
-		/// or an
-		/// <see cref="OpenAutoOrderedList(FluentRenderTreeBuilder, string?, string?, string?, object?, int)">Auto Ordered List</see>;
-		/// instead, use <see cref="NewAutoItem(FluentRenderTreeBuilder, string?, object?, int)">NewAutoItem</see>.
+		/// <see cref="OpenAutoList(FluentRenderTreeBuilder, string?, string?, string?, object?, int)">
+		/// OpenAutoList(...)</see> or an
+		/// <see cref="OpenAutoOrderedList(FluentRenderTreeBuilder, string?, string?, string?, object?, int)">
+		/// OpenAutoOrderedList(...)</see>;
+		/// instead, use <see cref="NewAutoItem(FluentRenderTreeBuilder, string?, object?, int)">
+		/// NewAutoItem(...)</see>.
 		/// </remarks>
 		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
 		/// <param name="class">The optional CSS class name for the new list item.</param>
@@ -148,17 +150,18 @@ namespace Fuzzy.Components
 
 		/// <summary>
 		/// Opens a new <c>&lt;li&gt;</c> block within an
-		/// <see cref="OpenAutoList(FluentRenderTreeBuilder, string?, string?, string?, object?, int)">Auto List</see>
-		/// or an
-		/// <see cref="OpenAutoOrderedList(FluentRenderTreeBuilder, string?, string?, string?, object?, int)">Auto Ordered List</see>,
+		/// <see cref="OpenAutoList(FluentRenderTreeBuilder, string?, string?, string?, object?, int)">
+		/// OpenAutoList(...)</see> or an
+		/// <see cref="OpenAutoOrderedList(FluentRenderTreeBuilder, string?, string?, string?, object?, int)">
+		/// OpenAutoOrderedList(...)</see>,
 		/// adding the given CSS class attribute, and setting
 		/// the key, if provided, after first closing the currently open item.
 		/// </summary>
 		/// <remarks>
 		/// Note: Do not use this method within a
-		/// <see cref="OpenList(FluentRenderTreeBuilder, string?, string?, int)">List</see> or an
-		/// <see cref="OpenOrderedList(FluentRenderTreeBuilder, string?, string?, int)">Ordered List</see>;
-		/// instead, use <see cref="NewItem(FluentRenderTreeBuilder, string?, object?, int)">NewItem</see>.
+		/// <see cref="OpenList(FluentRenderTreeBuilder, string?, string?, int)">OpenList(...)</see> or an
+		/// <see cref="OpenOrderedList(FluentRenderTreeBuilder, string?, string?, int)">OpenOrderedList(...)</see>;
+		/// instead, use <see cref="NewItem(FluentRenderTreeBuilder, string?, object?, int)">NewItem(...)</see>.
 		/// </remarks>
 		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
 		/// <param name="class">The optional CSS class name for the new list item.</param>

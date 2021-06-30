@@ -1,4 +1,21 @@
-Version history:
+
+Documentation
+
+Please find the docs here:
+https://fuzzy-work.github.io/FluentRenderTreeBuilder/
+
+
+Version History
+
+3.0.1:
+- Note to self: release notes are text, not Markdown!
+
+3.0.0:
+- Updated to .NET 5.
+- Added more detail to Callback examples to better show what's going on.
+- Addressed several nullability warnings.
+- Updated doc comments.
+- Code clean-up.
 
 2.2.0:
 - Exposed `GetSequence()` and `Builder` to give extensions more control.

@@ -17,7 +17,7 @@ namespace Fuzzy.Components
 		/// </summary>
 		/// <remarks>
 		/// Note: Each call to this method must be matched with a call to
-		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close</see>.
+		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close(...)</see>.
 		/// </remarks>
 		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
 		/// <param name="name">The element name, e.g. <c>ul</c>, <c>table</c>, etc.</param>
@@ -43,7 +43,7 @@ namespace Fuzzy.Components
 		/// </summary>
 		/// <remarks>
 		/// Note: This block is automatically closed, so calling
-		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close</see> is unnecessary.
+		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close(...)</see> is unnecessary.
 		/// </remarks>
 		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
 		/// <param name="name">The element name, e.g. <c>ul</c>, <c>table</c>, etc.</param>
@@ -79,7 +79,7 @@ namespace Fuzzy.Components
 		/// </summary>
 		/// <remarks>
 		/// Note: This block is automatically closed, so calling
-		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close</see> is unnecessary.
+		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close(...)</see> is unnecessary.
 		/// </remarks>
 		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
 		/// <param name="name">The element name, e.g. <c>ul</c>, <c>table</c>, etc.</param>
@@ -105,7 +105,7 @@ namespace Fuzzy.Components
 		/// </summary>
 		/// <remarks>
 		/// Note: This block is automatically closed, so calling
-		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close</see> is unnecessary.
+		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close(...)</see> is unnecessary.
 		/// </remarks>
 		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
 		/// <param name="name">The element name, e.g. <c>ul</c>, <c>table</c>, etc.</param>
@@ -131,7 +131,7 @@ namespace Fuzzy.Components
 		/// </summary>
 		/// <remarks>
 		/// Note: This block is automatically closed, so calling
-		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close</see> is unnecessary.
+		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close(...)</see> is unnecessary.
 		/// </remarks>
 		/// <typeparam name="TComponent">The <see cref="Type"/> of the component to add.</typeparam>
 		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
@@ -158,7 +158,7 @@ namespace Fuzzy.Components
 		/// </summary>
 		/// <remarks>
 		/// Note: Each call to this method must be matched with a call to
-		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close</see>.
+		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close(...)</see>.
 		/// </remarks>
 		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
 		/// <param name="type">The <see cref="Type"/> of the component to open.</param>
@@ -184,7 +184,7 @@ namespace Fuzzy.Components
 		/// </summary>
 		/// <remarks>
 		/// Note: Each call to this method must be matched with a call to
-		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close</see>.
+		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close(...)</see>.
 		/// </remarks>
 		/// <typeparam name="TComponent">The <see cref="Type"/> of the component to open.</typeparam>
 		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
@@ -211,7 +211,7 @@ namespace Fuzzy.Components
 		/// </summary>
 		/// <remarks>
 		/// Note: This block is automatically closed, so calling
-		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close</see> is unnecessary.
+		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close(...)</see> is unnecessary.
 		/// </remarks>
 		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
 		/// <param name="type">The <see cref="Type"/> of the component.</param>
@@ -238,7 +238,7 @@ namespace Fuzzy.Components
 		/// </summary>
 		/// <remarks>
 		/// Note: This block is automatically closed, so calling
-		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close</see> is unnecessary.
+		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close(...)</see> is unnecessary.
 		/// </remarks>
 		/// <typeparam name="TComponent">The <see cref="Type"/> of the component.</typeparam>
 		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
@@ -266,7 +266,7 @@ namespace Fuzzy.Components
 		/// </summary>
 		/// <remarks>
 		/// Note: Each call to this method must be matched with a call to
-		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close</see>.
+		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close(...)</see>.
 		/// </remarks>
 		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
 		/// <param name="class">The optional CSS class name.</param>
@@ -305,7 +305,7 @@ namespace Fuzzy.Components
 		/// </summary>
 		/// <remarks>
 		/// Note: This block is automatically closed, so calling
-		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close</see> is unnecessary.
+		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close(...)</see> is unnecessary.
 		/// </remarks>
 		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
 		/// <param name="fragment">The <see cref="RenderFragment"/> to add.</param>
@@ -328,7 +328,7 @@ namespace Fuzzy.Components
 		/// </summary>
 		/// <remarks>
 		/// Note: This block is automatically closed, so calling
-		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close</see> is unnecessary.
+		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close(...)</see> is unnecessary.
 		/// </remarks>
 		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
 		/// <param name="type">The <see cref="Type"/> of the component to add.</param>
@@ -351,7 +351,7 @@ namespace Fuzzy.Components
 		/// </summary>
 		/// <remarks>
 		/// Note: This block is automatically closed, so calling
-		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close</see> is unnecessary.
+		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close(...)</see> is unnecessary.
 		/// </remarks>
 		/// <typeparam name="TComponent">The <see cref="Type"/> of the component to add.</typeparam>
 		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
@@ -411,7 +411,7 @@ namespace Fuzzy.Components
 		/// </summary>
 		/// <remarks>
 		/// Note: This block is automatically closed, so calling
-		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close</see> is unnecessary.
+		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close(...)</see> is unnecessary.
 		/// </remarks>
 		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
 		/// <param name="level">The heading level, e.g. <c>1</c>, <c>2</c>, <c>3</c>, etc.</param>
@@ -430,7 +430,7 @@ namespace Fuzzy.Components
 		/// </summary>
 		/// <remarks>
 		/// Note: This block is automatically closed, so calling
-		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close</see> is unnecessary.
+		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close(...)</see> is unnecessary.
 		/// </remarks>
 		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
 		/// <param name="markup">The markup content to add in the <c>&lt;h1&gt;</c> block.</param>
@@ -448,7 +448,7 @@ namespace Fuzzy.Components
 		/// </summary>
 		/// <remarks>
 		/// Note: This block is automatically closed, so calling
-		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close</see> is unnecessary.
+		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close(...)</see> is unnecessary.
 		/// </remarks>
 		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
 		/// <param name="markup">The markup content to add in the <c>&lt;h2&gt;</c> block.</param>
@@ -466,7 +466,7 @@ namespace Fuzzy.Components
 		/// </summary>
 		/// <remarks>
 		/// Note: This block is automatically closed, so calling
-		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close</see> is unnecessary.
+		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close(...)</see> is unnecessary.
 		/// </remarks>
 		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
 		/// <param name="markup">The markup content to add in the <c>&lt;h3&gt;</c> block.</param>
@@ -484,7 +484,7 @@ namespace Fuzzy.Components
 		/// </summary>
 		/// <remarks>
 		/// Note: This block is automatically closed, so calling
-		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close</see> is unnecessary.
+		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close(...)</see> is unnecessary.
 		/// </remarks>
 		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
 		/// <param name="markup">The markup content to add in the <c>&lt;h4&gt;</c> block.</param>
@@ -502,7 +502,7 @@ namespace Fuzzy.Components
 		/// </summary>
 		/// <remarks>
 		/// Note: This block is automatically closed, so calling
-		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close</see> is unnecessary.
+		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close(...)</see> is unnecessary.
 		/// </remarks>
 		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
 		/// <param name="markup">The markup content to add in the <c>&lt;h5&gt;</c> block.</param>
@@ -520,7 +520,7 @@ namespace Fuzzy.Components
 		/// </summary>
 		/// <remarks>
 		/// Note: This block is automatically closed, so calling
-		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close</see> is unnecessary.
+		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close(...)</see> is unnecessary.
 		/// </remarks>
 		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
 		/// <param name="markup">The markup content to add in the <c>&lt;h6&gt;</c> block.</param>
@@ -550,7 +550,7 @@ namespace Fuzzy.Components
 		/// </summary>
 		/// <remarks>
 		/// Note: Each call to this method must be matched with a call to
-		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close</see>.
+		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close(...)</see>.
 		/// </remarks>
 		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
 		/// <param name="class">The optional CSS class name.</param>
@@ -571,7 +571,7 @@ namespace Fuzzy.Components
 		/// </summary>
 		/// <remarks>
 		/// Note: This block is automatically closed, so calling
-		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close</see> is unnecessary.
+		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close(...)</see> is unnecessary.
 		/// </remarks>
 		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
 		/// <param name="markup">The markup content to add in the block.</param>
@@ -599,7 +599,7 @@ namespace Fuzzy.Components
 		/// </summary>
 		/// <remarks>
 		/// Note: This block is automatically closed, so calling
-		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close</see> is unnecessary.
+		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close(...)</see> is unnecessary.
 		/// </remarks>
 		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
 		/// <param name="fragment">The <see cref="RenderFragment"/> to add.</param>
@@ -622,7 +622,7 @@ namespace Fuzzy.Components
 		/// </summary>
 		/// <remarks>
 		/// Note: This block is automatically closed, so calling
-		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close</see> is unnecessary.
+		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close(...)</see> is unnecessary.
 		/// </remarks>
 		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
 		/// <param name="type">The <see cref="Type"/> of the component to add.</param>
@@ -645,7 +645,7 @@ namespace Fuzzy.Components
 		/// </summary>
 		/// <remarks>
 		/// Note: This block is automatically closed, so calling
-		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close</see> is unnecessary.
+		/// <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close(...)</see> is unnecessary.
 		/// </remarks>
 		/// <typeparam name="TComponent">The <see cref="Type"/> of the component to add.</typeparam>
 		/// <param name="frtb">The <see cref="FluentRenderTreeBuilder"/>.</param>
@@ -663,7 +663,7 @@ namespace Fuzzy.Components
 			=> frtb.ComponentElement<TComponent>("p", @class, id, key, prettyPrint, line);
 
 		/// <summary>
-		/// Calls <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close</see> with the
+		/// Calls <see cref="FluentRenderTreeBuilder.Close(bool, int)">Close(...)</see> with the
 		/// <c>prettyPrint</c> parameter set to <c>false</c>, to generate markup to close the
 		/// last opened <c>Region</c>, <c>Element</c> or <c>Component</c> block without any
 		/// newline or indent whitespace, even if pretty-printing is enabled (see the

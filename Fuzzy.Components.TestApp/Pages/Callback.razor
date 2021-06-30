@@ -1,18 +1,19 @@
 ﻿@page "/callback"
 
-
 <h1>Callback Page</h1>
 <br />
-<p>Message: @_message</p>
+<p>@_message</p>
 
 <hr />
 
-<CallbackComponent SayHello="SayHello" Name="Alice" />
+<CallbackComponent @ref="_callbackComponent" SayHello="SayHelloToAlice" Name="Alice" />
 
-@code{
+@code
+{
+	string _message = "Message: ";
+	int _messageCount = 0;
+	CallbackComponent? _callbackComponent;
 
-	string? _message;
-
-	public void SayHello(string message)
-		=> _message = message;
+	public void SayHelloToAlice (string message)
+		=> _message = $"Message {++_messageCount}: '{message}' from component named '{_callbackComponent?.Name}'";
 }

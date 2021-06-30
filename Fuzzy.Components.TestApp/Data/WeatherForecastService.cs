@@ -11,7 +11,7 @@ namespace Fuzzy.Components.TestApp.Data
 		const int _maxTemp = 55;
 		const int _numTemps = 7;
 
-		static readonly Random _random = new Random();
+		static readonly Random _random = new();
 
 		static readonly int[] _temps = new[]
 		{

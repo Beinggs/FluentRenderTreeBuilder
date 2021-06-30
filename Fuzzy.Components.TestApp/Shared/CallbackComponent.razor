@@ -1,6 +1,6 @@
 ﻿<h4>Callback Component</h4>
 
-<button class="btn btn-primary" @onclick="ButtonClicked">Click me</button>
+<button class="btn btn-primary" @onclick="ButtonClicked">Send Message</button>
 
 @code{
     [Parameter]
@@ -10,5 +10,5 @@
     public EventCallback<string> SayHello { get; set; }
 
     public void ButtonClicked()
-        => SayHello.InvokeAsync($"Hello {Name}");
+        => SayHello.InvokeAsync ($"Hello {Name}");
 }

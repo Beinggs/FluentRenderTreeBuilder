@@ -1,13 +1,10 @@
 ﻿using System;
 
-using Fuzzy.Components.TestApp.Extensions;
-
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
-using Microsoft.AspNetCore.Components.Routing;
-using Microsoft.AspNetCore.Components.Web;
-
 using Microsoft.Extensions.Logging;
+
+using Fuzzy.Components.TestApp.Extensions;
 
 
 namespace Fuzzy.Components.TestApp.Shared
@@ -28,18 +25,18 @@ namespace Fuzzy.Components.TestApp.Shared
 
 		bool _collapseNavMenu = true;
 
-		protected override void BuildRenderTree(RenderTreeBuilder builder)
-			=> builder.Build(logger: Logger)
-				.OpenDiv(_topRowClass)
-					.Markup(_topLink)
-					.OpenElement("button", _buttonClass)
-						.OnClick(this, ToggleNavMenu)
-						.Markup(_topContent, prettyPrint: true)
-				.Close(2) // button, div
+		protected override void BuildRenderTree (RenderTreeBuilder builder)
+			=> builder.Build (logger: Logger)
+				.OpenDiv (_topRowClass)
+					.Markup (_topLink)
+					.OpenElement ("button", _buttonClass)
+						.OnClick (this, ToggleNavMenu)
+						.Markup (_topContent, prettyPrint: true)
+				.Close (2) // button, div
 				.NewLine()
-				.OpenElement("nav", NavMenuCssClass)
-					.OnClick(this, ToggleNavMenu)
-					.Menu(_listClass, _itemClass, "nav-link",
+				.OpenElement ("nav", NavMenuCssClass)
+					.OnClick (this, ToggleNavMenu)
+					.Menu (_listClass, _itemClass, "nav-link",
 							("", "home", "Home"),
 							("counter", "plus", "Counter"),
 							("fluent-counter", "plus", "Fluent Counter"),
